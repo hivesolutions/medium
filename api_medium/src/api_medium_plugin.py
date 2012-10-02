@@ -43,9 +43,8 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
     """
 
     id = "pt.hive.hive_development.plugins.service.media_dashboard"
-    name = "Media Dashboard Service Plugin"
-    short_name = "Media Dashboard Service Main"
-    description = "The plugin that offers the media dashboard service"
+    name = "Medium Api"
+    description = "The plugin that offers the medium api"
     version = "1.0.0"
     author = "Hive Solutions Lda. <development@hive.pt>"
     loading_type = colony.base.plugin_system.EAGER_LOADING_TYPE
@@ -81,21 +80,6 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
         import service_media_dashboard.media_dashboard.service_media_dashboard_system
         self.service_media_dashboard = service_media_dashboard.media_dashboard.service_media_dashboard_system.ServiceMediaDashboard(self)
 
-    def end_load_plugin(self):
-        colony.base.plugin_system.Plugin.end_load_plugin(self)
-
-    def unload_plugin(self):
-        colony.base.plugin_system.Plugin.unload_plugin(self)
-
-    def end_unload_plugin(self):
-        colony.base.plugin_system.Plugin.end_unload_plugin(self)
-
-    def load_allowed(self, plugin, capability):
-        colony.base.plugin_system.Plugin.load_allowed(self, plugin, capability)
-
-    def unload_allowed(self, plugin, capability):
-        colony.base.plugin_system.Plugin.unload_allowed(self, plugin, capability)
-
     @colony.base.decorators.inject_dependencies
     def dependency_injected(self, plugin):
         colony.base.plugin_system.Plugin.dependency_injected(self, plugin)
@@ -112,15 +96,9 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
 
         return self.service_media_dashboard.create_remote_client(service_attributes)
 
-    def get_main_client_http_plugin(self):
-        return self.main_client_http_plugin
-
     @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.main.client.http")
     def set_main_client_http_plugin(self, main_client_http_plugin):
         self.main_client_http_plugin = main_client_http_plugin
-
-    def get_json_plugin(self):
-        return self.json_plugin
 
     @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.misc.json")
     def set_json_plugin(self, json_plugin):

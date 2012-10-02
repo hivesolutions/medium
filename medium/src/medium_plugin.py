@@ -43,7 +43,7 @@ class MediumPlugin(colony.base.system.Plugin):
     """
 
     id = "pt.hive.cronus.plugins.medium"
-    name = "Medium Plugin"
+    name = "Medium"
     description = "The plugin that offers the medium service"
     version = "1.0.0"
     author = "Hive Solutions Lda. <development@hive.pt>"
