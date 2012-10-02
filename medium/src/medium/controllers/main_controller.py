@@ -66,8 +66,12 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # processes the contents of the template file assigning the appropriate values to it
-        template_file = self.retrieve_template_file("general.html.tpl", partial_page = "index_contents.html.tpl")
+        # processes the contents of the template file assigning the
+        # appropriate values to it
+        template_file = self.retrieve_template_file(
+            "general.html.tpl",
+            partial_page = "index_contents.html.tpl"
+        )
         template_file.assign("fields_map", self.fields_map)
         template_file.assign("ticker_messages", self.ticker_messages_list)
         self.process_set_contents(rest_request, template_file)
@@ -105,7 +109,12 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/field/set", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(
+            parameters,
+            "medium/communication",
+            "medium/field/set",
+            serialized_status
+        )
 
         # sets the field in the fields map
         self.fields_map[key] = value
@@ -164,7 +173,12 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/message/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(
+            parameters,
+            "medium/communication",
+            "medium/message/new",
+            serialized_status
+        )
 
     def handle_media_message_json(self, rest_request, parameters = {}):
         """
@@ -218,7 +232,12 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/video/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(
+            parameters,
+            "medium/communication",
+            "medium/video/new",
+            serialized_status
+        )
 
     def handle_media_video_json(self, rest_request, parameters = {}):
         """
@@ -276,7 +295,12 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/ticker_message/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(
+            parameters,
+            "medium/communication",
+            "medium/ticker_message/new",
+            serialized_status
+        )
 
         # adds the status to the ticker messages list
         self.ticker_messages_list.append(status)
@@ -327,7 +351,12 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/ticker_message/clear", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(
+            parameters,
+            "medium/communication",
+            "medium/ticker_message/clear",
+            serialized_status
+        )
 
         # clears the status to the ticker messages list
         self.ticker_messages_list = []

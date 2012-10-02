@@ -63,7 +63,11 @@ class ExceptionController(controllers.Controller):
         exception = parameters.get(EXCEPTION_VALUE)
         exception_message = exception.get(MESSAGE_VALUE)
 
-        # processes the contents of the template file assigning the appropriate values to it
-        template_file = self.retrieve_template_file("general.html.tpl", partial_page = "exception.html.tpl")
+        # processes the contents of the template file assigning the
+        # appropriate values to it
+        template_file = self.retrieve_template_file(
+            "general.html.tpl",
+            partial_page = "exception.html.tpl"
+        )
         template_file.assign("exception_message", exception_message)
         self.process_set_contents(rest_request, template_file)
