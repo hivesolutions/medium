@@ -36,19 +36,13 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony.libs.import_util
 
-# runs the external imports
-web_mvc_utils = colony.libs.import_util.__import__("web_mvc_utils")
+mvc_utils = colony.libs.import_util.__import__("mvc_utils")
+controllers = colony.libs.import_util.__import__("controllers")
 
-class MainController:
+class MainController(controllers.Controller):
     """
-    The media dashboard main controller.
+    The medium main controller.
     """
-
-    media_dashboard_plugin = None
-    """ The media dashboard plugin """
-
-    media_dashboard = None
-    """ The media dashboard """
 
     fields_map = {}
     """ The map containing the filed values """
@@ -56,23 +50,12 @@ class MainController:
     ticker_messages_list = []
     """ The list containing the ticker messages """
 
-    def __init__(self, media_dashboard_plugin, media_dashboard):
-        """
-        Constructor of the class.
-
-        @type media_dashboard_plugin: MediaDashboardPlugin
-        @param media_dashboard_plugin: The media dashboard plugin.
-        @type media_dashboard: MediaDashboard
-        @param media_dashboard: The media dashboard.
-        """
-
-        self.media_dashboard_plugin = media_dashboard_plugin
-        self.media_dashboard = media_dashboard
-
+    def __init__(self, plugin, system):
+        controllers.Controller.__init__(self, plugin, system)
         self.fields_map = {}
         self.ticker_messages_list = []
 
-    @web_mvc_utils.serialize_exceptions("all")
+    @mvc_utils.serialize_exceptions("all")
     def handle_media_index(self, rest_request, parameters = {}):
         """
         Handles the given media index rest request.
@@ -89,7 +72,7 @@ class MainController:
         template_file.assign("ticker_messages", self.ticker_messages_list)
         self.process_set_contents(rest_request, template_file)
 
-    @web_mvc_utils.serialize_exceptions("all")
+    @mvc_utils.serialize_exceptions("all")
     def handle_media_field_serialized(self, rest_request, parameters = {}):
         """
         Handles the given media field serialized rest request.
@@ -102,10 +85,10 @@ class MainController:
         """
 
         # retrieves the serializer
-        serializer = parameters[web_mvc_utils.SERIALIZER_VALUE]
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.media_dashboard.communication_helper_controller
+        communication_helper_controller = self.system.communication_helper_controller
 
         # retrieves the key and value from the rest request
         key = self.get_field(rest_request, "key", "invalid")
@@ -122,7 +105,7 @@ class MainController:
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "media_dashboard/communication", "media_dashboard/field/set", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/field/set", serialized_status)
 
         # sets the field in the fields map
         self.fields_map[key] = value
@@ -139,16 +122,16 @@ class MainController:
         """
 
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # sets the serializer in the parameters
-        parameters[web_mvc_utils.SERIALIZER_VALUE] = json_plugin
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
         # handle media field serialized method
         self.handle_media_field_serialized(rest_request, parameters)
 
-    @web_mvc_utils.serialize_exceptions("all")
+    @mvc_utils.serialize_exceptions("all")
     def handle_media_message_serialized(self, rest_request, parameters = {}):
         """
         Handles the given media message serialized rest request.
@@ -161,10 +144,10 @@ class MainController:
         """
 
         # retrieves the serializer
-        serializer = parameters[web_mvc_utils.SERIALIZER_VALUE]
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.media_dashboard.communication_helper_controller
+        communication_helper_controller = self.system.communication_helper_controller
 
         # retrieves the message and type from the rest request
         value = self.get_field(rest_request, "value", "invalid")
@@ -181,7 +164,7 @@ class MainController:
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "media_dashboard/communication", "media_dashboard/message/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/message/new", serialized_status)
 
     def handle_media_message_json(self, rest_request, parameters = {}):
         """
@@ -195,16 +178,16 @@ class MainController:
         """
 
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # sets the serializer in the parameters
-        parameters[web_mvc_utils.SERIALIZER_VALUE] = json_plugin
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
         # handle media message serialized method
         self.handle_media_message_serialized(rest_request, parameters)
 
-    @web_mvc_utils.serialize_exceptions("all")
+    @mvc_utils.serialize_exceptions("all")
     def handle_media_video_serialized(self, rest_request, parameters = {}):
         """
         Handles the given media video serialized rest request.
@@ -217,10 +200,10 @@ class MainController:
         """
 
         # retrieves the serializer
-        serializer = parameters[web_mvc_utils.SERIALIZER_VALUE]
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.media_dashboard.communication_helper_controller
+        communication_helper_controller = self.system.communication_helper_controller
 
         # retrieves the video id from the rest request
         video_id = self.get_field(rest_request, "video_id", "invalid")
@@ -235,7 +218,7 @@ class MainController:
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "media_dashboard/communication", "media_dashboard/video/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/video/new", serialized_status)
 
     def handle_media_video_json(self, rest_request, parameters = {}):
         """
@@ -249,16 +232,16 @@ class MainController:
         """
 
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # sets the serializer in the parameters
-        parameters[web_mvc_utils.SERIALIZER_VALUE] = json_plugin
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
         # handle media video serialized method
         self.handle_media_video_serialized(rest_request, parameters)
 
-    @web_mvc_utils.serialize_exceptions("all")
+    @mvc_utils.serialize_exceptions("all")
     def handle_media_ticker_message_serialized(self, rest_request, parameters = {}):
         """
         Handles the given media ticker serialized message rest request.
@@ -271,10 +254,10 @@ class MainController:
         """
 
         # retrieves the serializer
-        serializer = parameters[web_mvc_utils.SERIALIZER_VALUE]
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.media_dashboard.communication_helper_controller
+        communication_helper_controller = self.system.communication_helper_controller
 
         # retrieves the value, sub value and type from the rest request
         value = self.get_field(rest_request, "value", "invalid")
@@ -293,7 +276,7 @@ class MainController:
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "media_dashboard/communication", "media_dashboard/ticker_message/new", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/ticker_message/new", serialized_status)
 
         # adds the status to the ticker messages list
         self.ticker_messages_list.append(status)
@@ -310,10 +293,10 @@ class MainController:
         """
 
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # sets the serializer in the parameters
-        parameters[web_mvc_utils.SERIALIZER_VALUE] = json_plugin
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
         # handle media ticker message serialized method
@@ -331,10 +314,10 @@ class MainController:
         """
 
         # retrieves the serializer
-        serializer = parameters[web_mvc_utils.SERIALIZER_VALUE]
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.media_dashboard.communication_helper_controller
+        communication_helper_controller = self.system.communication_helper_controller
 
         # creates the status (map)
         status = {}
@@ -344,7 +327,7 @@ class MainController:
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(parameters, "media_dashboard/communication", "media_dashboard/ticker_message/clear", serialized_status)
+        communication_helper_controller.send_serialized_broadcast_message(parameters, "medium/communication", "medium/ticker_message/clear", serialized_status)
 
         # clears the status to the ticker messages list
         self.ticker_messages_list = []
@@ -361,10 +344,10 @@ class MainController:
         """
 
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # sets the serializer in the parameters
-        parameters[web_mvc_utils.SERIALIZER_VALUE] = json_plugin
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
         # handle media ticker clear serialized method

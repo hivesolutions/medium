@@ -34,29 +34,12 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-MEDIA_DASHBOARD_RESOURCES_PATH = "media_dashboard/dashboard/resources"
-""" The media dashboard resources path """
+import colony.base.system
 
-EXTRAS_PATH = MEDIA_DASHBOARD_RESOURCES_PATH + "/extras"
-""" The extras path """
-
-class MediaDashboard:
+class Medium(colony.base.system.System):
     """
-    The media dashboard class.
+    The medium class.
     """
-
-    media_dashboard_plugin = None
-    """ The media dashboard plugin """
-
-    def __init__(self, media_dashboard_plugin):
-        """
-        Constructor of the class.
-
-        @type media_dashboard_plugin: MediaDashboardPlugin
-        @param media_dashboard_plugin: The media dashboard plugin.
-        """
-
-        self.media_dashboard_plugin = media_dashboard_plugin
 
     def load_components(self):
         """
@@ -64,11 +47,11 @@ class MediaDashboard:
         This load should occur only after the dependencies are loaded.
         """
 
-        # retrieves the web mvc utils plugin
-        mvc_utils_plugin = self.media_dashboard_plugin.mvc_utils_plugin
+        # retrieves the mvc utils plugin
+        mvc_utils_plugin = self.plugin.mvc_utils_plugin
 
         # creates the controllers and assigns them to the current instance
-        mvc_utils_plugin.assign_controllers(self, self.media_dashboard_plugin)
+        mvc_utils_plugin.assign_controllers(self, self.plugin)
 
     def unload_components(self):
         """
@@ -76,8 +59,8 @@ class MediaDashboard:
         This load should occur the earliest possible in the unloading process.
         """
 
-        # retrieves the web mvc utils plugin
-        mvc_utils_plugin = self.media_dashboard_plugin.mvc_utils_plugin
+        # retrieves the mvc utils plugin
+        mvc_utils_plugin = self.plugin.mvc_utils_plugin
 
         # destroys the controllers, unregistering them from the internal structures
         mvc_utils_plugin.unassign_controllers(self)
@@ -94,12 +77,12 @@ class MediaDashboard:
         """
 
         return (
-            (r"^media_dashboard/?$", self.main_controller.handle_media_index, "get"),
-            (r"^media_dashboard/field$", self.main_controller.handle_media_field_json, "get", "json"),
-            (r"^media_dashboard/message$", self.main_controller.handle_media_message_json, "get", "json"),
-            (r"^media_dashboard/video$", self.main_controller.handle_media_video_json, "get", "json"),
-            (r"^media_dashboard/ticker_message$", self.main_controller.handle_media_ticker_message_json, "get", "json"),
-            (r"^media_dashboard/ticker_clear$", self.main_controller.handle_media_ticker_clear_json, "get", "json")
+            (r"^medium/?$", self.main_controller.handle_media_index, "get"),
+            (r"^medium/field$", self.main_controller.handle_media_field_json, "get", "json"),
+            (r"^medium/message$", self.main_controller.handle_media_message_json, "get", "json"),
+            (r"^medium/video$", self.main_controller.handle_media_video_json, "get", "json"),
+            (r"^medium/ticker_message$", self.main_controller.handle_media_ticker_message_json, "get", "json"),
+            (r"^medium/ticker_clear$", self.main_controller.handle_media_ticker_clear_json, "get", "json")
         )
 
     def get_communication_patterns(self):
@@ -115,7 +98,7 @@ class MediaDashboard:
         """
 
         return (
-            (r"^media_dashboard/communication$", (self.communication_controller.handle_data, self.communication_controller.handle_connection_changed, "media_dashboard/communication")),
+            (r"^medium/communication$", (self.communication_controller.handle_data, self.communication_controller.handle_connection_changed, "medium/communication")),
         )
 
     def get_resource_patterns(self):
@@ -130,11 +113,11 @@ class MediaDashboard:
         """
 
         # retrieves the plugin manager
-        plugin_manager = self.media_dashboard_plugin.manager
+        plugin_manager = self.plugin.manager
 
-        # retrieves the media dashboard plugin path
-        media_dashboard_plugin_path = plugin_manager.get_plugin_path_by_id(self.media_dashboard_plugin.id)
+        # retrieves the medium plugin path
+        plugin_path = plugin_manager.get_plugin_path_by_id(self.plugin.id)
 
         return (
-            (r"^media_dashboard/resources/.+$", (media_dashboard_plugin_path + "/" + EXTRAS_PATH, "media_dashboard/resources")),
+            (r"^medium/resources/.+$", (plugin_path + "/medium/resources/extras", "medium/resources")),
         )

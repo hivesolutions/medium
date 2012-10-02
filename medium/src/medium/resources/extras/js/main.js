@@ -142,7 +142,7 @@ var messageProcessor = function(data) {
 
     // switches over the message id
     switch (messageId) {
-        case "media_dashboard/field/set" :
+        case "medium/field/set" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -158,7 +158,7 @@ var messageProcessor = function(data) {
             // breaks the switch
             break;
 
-        case "media_dashboard/message/new" :
+        case "medium/message/new" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -176,7 +176,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
-        case "media_dashboard/video/new" :
+        case "medium/video/new" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -188,7 +188,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
-        case "media_dashboard/ticker_message/new" :
+        case "medium/ticker_message/new" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -206,7 +206,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
-        case "media_dashboard/ticker_message/clear" :
+        case "medium/ticker_message/clear" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 

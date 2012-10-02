@@ -42,7 +42,7 @@ class ApiMediumPlugin(colony.base.system.Plugin):
     he main class for the Medium Api plugin
     """
 
-    id = "pt.hive.hive_development.plugins.service.media_dashboard"
+    id = "pt.hive.cronus.plugins.api.medium"
     name = "Medium Api"
     description = "The plugin that offers the medium api"
     version = "1.0.0"

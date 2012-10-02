@@ -34,35 +34,20 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
+import colony.libs.import_util
+
 EXCEPTION_VALUE = "exception"
 """ The exception value """
 
 MESSAGE_VALUE = "message"
 """ The message value """
 
-class ExceptionController:
+controllers = colony.libs.import_util.__import__("controllers")
+
+class ExceptionController(controllers.Controller):
     """
-    The media dashboard exception controller.
+    The medium exception controller.
     """
-
-    media_dashboard_plugin = None
-    """ The media dashboard plugin """
-
-    media_dashboard = None
-    """ The media dashboard """
-
-    def __init__(self, media_dashboard_plugin, media_dashboard):
-        """
-        Constructor of the class.
-
-        @type media_dashboard_plugin: MediaDashboardPlugin
-        @param media_dashboard_plugin: The media dashboard plugin.
-        @type media_dashboard: MediaDashboard
-        @param media_dashboard: The media dashboard.
-        """
-
-        self.media_dashboard_plugin = media_dashboard_plugin
-        self.media_dashboard = media_dashboard
 
     def handle_exception(self, rest_request, parameters = {}):
         """

@@ -1,6 +1,6 @@
 ${include file="doctype.html.tpl" /}
 <head>
-    <title>Hive Solutions Media Dashboard</title>
+    <title>Hive Solutions Medium</title>
     ${include file="content_type.html.tpl" /}
     ${include file="includes.html.tpl" /}
 </head>

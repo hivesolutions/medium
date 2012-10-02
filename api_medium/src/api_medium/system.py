@@ -34,6 +34,8 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
+import colony.base.system
+
 DEFAULT_CHARSET = "utf-8"
 """ The default charset """
 
@@ -52,23 +54,10 @@ FIELD_URL_SUFFIX = "field.json"
 MESSAGE_URL_SUFFIX = "message.json"
 """ The suffix for the message url """
 
-class ServiceMediaDashboard:
+class ApiMedium(colony.base.system.System):
     """
-    The service media dashboard class.
+    The api medium class.
     """
-
-    service_media_dashboard_plugin = None
-    """ The service media dashboard plugin """
-
-    def __init__(self, service_media_dashboard_plugin):
-        """
-        Constructor of the class.
-
-        @type service_media_dashboard_plugin: ServiceMediaDashboardPlugin
-        @param service_media_dashboard_plugin: The service media dashboard plugin.
-        """
-
-        self.service_media_dashboard_plugin = service_media_dashboard_plugin
 
     def create_remote_client(self, service_attributes, open_client = True):
         """
@@ -78,32 +67,32 @@ class ServiceMediaDashboard:
         @param service_attributes: The service attributes to be used.
         @type open_client: bool
         @param open_client: If the client should be opened.
-        @rtype: MediaDashboardClient
+        @rtype: MediumClient
         @return: The created remote client.
         """
 
         # retrieves the client http plugin
-        client_http_plugin = self.service_media_dashboard_plugin.client_http_plugin
+        client_http_plugin = self.api.client_http_plugin
 
         # retrieves the json plugin
-        json_plugin = self.service_media_dashboard_plugin.json_plugin
+        json_plugin = self.api.json_plugin
 
-        # retrieves the media dashboard structure (if available)
-        media_dashboard_structure = service_attributes.get("media_dashboard_structure", None)
+        # retrieves the medium structure (if available)
+        medium_structure = service_attributes.get("medium_structure", None)
 
-        # creates a new media dashboard client with the given options
-        media_dashboard_client = MediaDashboardClient(json_plugin, client_http_plugin, media_dashboard_structure)
+        # creates a new medium client with the given options
+        medium_client = MediumClient(json_plugin, client_http_plugin, medium_structure)
 
         # in case the client is meant to be open
         # open the client
-        open_client and media_dashboard_client.open()
+        open_client and medium_client.open()
 
-        # returns the media dashboard client
-        return media_dashboard_client
+        # returns the medium client
+        return medium_client
 
-class MediaDashboardClient:
+class MediumClient:
     """
-    The class that represents a media dashboard client connection.
+    The class that represents a medium client connection.
     """
 
     json_plugin = None
@@ -112,13 +101,13 @@ class MediaDashboardClient:
     client_http_plugin = None
     """ The client http plugin """
 
-    media_dashboard_structure = None
-    """ The media dashboard structure """
+    medium_structure = None
+    """ The medium structure """
 
     http_client = None
     """ The http client for the connection """
 
-    def __init__(self, json_plugin = None, client_http_plugin = None, media_dashboard_structure = None):
+    def __init__(self, json_plugin = None, client_http_plugin = None, medium_structure = None):
         """
         Constructor of the class.
 
@@ -126,24 +115,24 @@ class MediaDashboardClient:
         @param json_plugin: The json plugin.
         @type client_http_plugin: ClientHttpPlugin
         @param client_http_plugin: The client http plugin.
-        @type media_dashboard_structure: MediaDashboardStructure
-        @param media_dashboard_structure: The media dashboard structure.
+        @type medium_structure: MediumStructure
+        @param medium_structure: The medium structure.
         """
 
         self.json_plugin = json_plugin
         self.client_http_plugin = client_http_plugin
-        self.media_dashboard_structure = media_dashboard_structure
+        self.medium_structure = medium_structure
 
     def open(self):
         """
-        Opens the media dashboard client.
+        Opens the medium client.
         """
 
         pass
 
     def close(self):
         """
-        Closes the media dashboard client.
+        Closes the medium client.
         """
 
         # in case an http client is defined
@@ -151,24 +140,24 @@ class MediaDashboardClient:
             # closes the http client
             self.http_client.close({})
 
-    def generate_media_dashboard_structure(self, base_url, set_structure = True):
+    def generate_medium_structure(self, base_url, set_structure = True):
         """
-        Generates a new media dashboard structure, for the given parameters.
+        Generates a new medium structure, for the given parameters.
 
         @type base_url: String
-        @param base_url: The base url of the media dashboard provider.
+        @param base_url: The base url of the medium provider.
         """
 
-        # constructs a new media dashboard structure
-        media_dashboard_structure = MediaDashboardStructure(base_url)
+        # constructs a new medium structure
+        medium_structure = MediumStructure(base_url)
 
         # in case the structure is meant to be set
         if set_structure:
-            # sets the media dashboard structure
-            self.set_media_dashboard_structure(media_dashboard_structure)
+            # sets the medium structure
+            self.set_medium_structure(medium_structure)
 
-        # returns the media dashboard structure
-        return media_dashboard_structure
+        # returns the medium structure
+        return medium_structure
 
     def set_field(self, key, value):
         """
@@ -183,7 +172,7 @@ class MediaDashboardClient:
         """
 
         # retrieves the base url
-        base_url = self.media_dashboard_structure.base_url
+        base_url = self.medium_structure.base_url
 
         # sets the retrieval url
         retrieval_url = base_url + FIELD_URL_SUFFIX
@@ -242,7 +231,7 @@ class MediaDashboardClient:
         """
 
         # retrieves the base url
-        base_url = self.media_dashboard_structure.base_url
+        base_url = self.medium_structure.base_url
 
         # sets the retrieval url
         retrieval_url = base_url + MESSAGE_URL_SUFFIX
@@ -265,25 +254,25 @@ class MediaDashboardClient:
         # returns the data
         return data
 
-    def get_media_dashboard_structure(self):
+    def get_medium_structure(self):
         """
-        Retrieves the media dashboard structure.
+        Retrieves the medium structure.
 
-        @rtype: MediaDashboardStructure
-        @return: The media dashboard structure.
-        """
-
-        return self.media_dashboard_structure
-
-    def set_media_dashboard_structure(self, media_dashboard_structure):
-        """
-        Sets the media dashboard structure.
-
-        @type media_dashboard_structure: MediaDashboardStructure
-        @param media_dashboard_structure: The media dashboard structure.
+        @rtype: MediumStructure
+        @return: The medium structure.
         """
 
-        self.media_dashboard_structure = media_dashboard_structure
+        return self.medium_structure
+
+    def set_medium_structure(self, medium_structure):
+        """
+        Sets the medium structure.
+
+        @type medium_structure: MediumStructure
+        @param medium_structure: The medium structure.
+        """
+
+        self.medium_structure = medium_structure
 
     def _build_url(self, base_url, parameters):
         """
@@ -362,20 +351,20 @@ class MediaDashboardClient:
         # returns the http client
         return self.http_client
 
-class MediaDashboardStructure:
+class MediumStructure:
     """
-    The media dashboard structure class.
+    The medium structure class.
     """
 
     base_url = None
-    """ The base url of the media dashboard provider """
+    """ The base url of the medium provider """
 
     def __init__(self, base_url):
         """
         Constructor of the class.
 
         @type base_url: String
-        @param base_url: The base url of the media dashboard provider.
+        @param base_url: The base url of the medium provider.
         """
 
         self.base_url = base_url

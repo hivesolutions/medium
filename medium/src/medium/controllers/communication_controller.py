@@ -42,39 +42,20 @@ EXCEPTION_VALUE = "exception"
 MESSAGE_VALUE = "message"
 """ The message value """
 
-# runs the external imports
-web_mvc_utils = colony.libs.import_util.__import__("web_mvc_utils")
+mvc_utils = colony.libs.import_util.__import__("mvc_utils")
+controllers = colony.libs.import_util.__import__("controllers")
 
-class CommunicationController:
+class CommunicationController(controllers.Controller):
     """
-    The media dashboard communication controller.
+    The medium communication controller.
     """
-
-    media_dashboard_plugin = None
-    """ The media dashboard plugin """
-
-    media_dashboard = None
-    """ The media dashboard """
-
-    def __init__(self, media_dashboard_plugin, media_dashboard):
-        """
-        Constructor of the class.
-
-        @type media_dashboard_plugin: MediaDashboardPlugin
-        @param media_dashboard_plugin: The media dashboard plugin.
-        @type media_dashboard: MediaDashboard
-        @param media_dashboard: The media dashboard.
-        """
-
-        self.media_dashboard_plugin = media_dashboard_plugin
-        self.media_dashboard = media_dashboard
 
     def handle_data(self, rest_communication_request, parameters = {}):
         """
         Handles the given data communication request.
 
         @type rest_communication_request: RestRequest
-        @param rest_communication_request: The media dashboard data rest
+        @param rest_communication_request: The medium data rest
         communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -87,7 +68,7 @@ class CommunicationController:
         Handles the given connection changed communication request.
 
         @type rest_communication_request: RestRequest
-        @param rest_communication_request: The media dashboard connection changed
+        @param rest_communication_request: The medium connection changed
         rest communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.

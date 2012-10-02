@@ -34,29 +34,14 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
+import colony.libs.import_util
+
+controllers = colony.libs.import_util.__import__("controllers")
+
 class CommunicationHelperController:
     """
     The communication helper controller.
     """
-
-    media_dashboard_plugin = None
-    """ The media dashboard plugin """
-
-    media_dashboard = None
-    """ The media dashboard """
-
-    def __init__(self, media_dashboard_plugin, media_dashboard):
-        """
-        Constructor of the class.
-
-        @type media_dashboard_plugin: MediaDashboardPlugin
-        @param media_dashboard_plugin: The media dashboard plugin.
-        @type media_dashboard: MediaDashboard
-        @param media_dashboard: The media dashboard.
-        """
-
-        self.media_dashboard_plugin = media_dashboard_plugin
-        self.media_dashboard = media_dashboard
 
     def send_serialized_broadcast_message(self, parameters, connection_name, message_id, message_contents):
         # serializes the message using, sending the message id and the message contents
@@ -67,7 +52,7 @@ class CommunicationHelperController:
 
     def _get_serialized_message(self, message_id, message_contents):
         # retrieves the json plugin
-        json_plugin = self.media_dashboard_plugin.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # creates the message map
         message_map = {}
