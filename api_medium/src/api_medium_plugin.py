@@ -47,9 +47,9 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
     description = "The plugin that offers the medium api"
     version = "1.0.0"
     author = "Hive Solutions Lda. <development@hive.pt>"
-    loading_type = colony.base.plugin_system.EAGER_LOADING_TYPE
+    loading_type = colony.base.system.EAGER_LOADING_TYPE
     platforms = [
-        colony.base.plugin_system.CPYTHON_ENVIRONMENT
+        colony.base.system.CPYTHON_ENVIRONMENT
     ]
     attributes = {
         "build_automation_file_path" : "$base{plugin_directory}/service_media_dashboard/media_dashboard/resources/baf.xml"
@@ -59,8 +59,8 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
         "build_automation_item"
     ]
     dependencies = [
-        colony.base.plugin_system.PluginDependency("pt.hive.colony.plugins.main.client.http", "1.x.x"),
-        colony.base.plugin_system.PluginDependency("pt.hive.colony.plugins.misc.json", "1.x.x")
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.main.client.http", "1.x.x"),
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json", "1.x.x")
     ]
     main_modules = [
         "service_media_dashboard.media_dashboard.service_media_dashboard_system"
@@ -76,13 +76,13 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
     """ The json plugin """
 
     def load_plugin(self):
-        colony.base.plugin_system.Plugin.load_plugin(self)
+        colony.base.system.Plugin.load_plugin(self)
         import service_media_dashboard.media_dashboard.service_media_dashboard_system
         self.service_media_dashboard = service_media_dashboard.media_dashboard.service_media_dashboard_system.ServiceMediaDashboard(self)
 
     @colony.base.decorators.inject_dependencies
     def dependency_injected(self, plugin):
-        colony.base.plugin_system.Plugin.dependency_injected(self, plugin)
+        colony.base.system.Plugin.dependency_injected(self, plugin)
 
     def create_remote_client(self, service_attributes):
         """
