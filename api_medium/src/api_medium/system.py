@@ -82,8 +82,8 @@ class ServiceMediaDashboard:
         @return: The created remote client.
         """
 
-        # retrieves the main client http plugin
-        main_client_http_plugin = self.service_media_dashboard_plugin.main_client_http_plugin
+        # retrieves the client http plugin
+        client_http_plugin = self.service_media_dashboard_plugin.client_http_plugin
 
         # retrieves the json plugin
         json_plugin = self.service_media_dashboard_plugin.json_plugin
@@ -92,7 +92,7 @@ class ServiceMediaDashboard:
         media_dashboard_structure = service_attributes.get("media_dashboard_structure", None)
 
         # creates a new media dashboard client with the given options
-        media_dashboard_client = MediaDashboardClient(json_plugin, main_client_http_plugin, media_dashboard_structure)
+        media_dashboard_client = MediaDashboardClient(json_plugin, client_http_plugin, media_dashboard_structure)
 
         # in case the client is meant to be open
         # open the client
@@ -109,8 +109,8 @@ class MediaDashboardClient:
     json_plugin = None
     """ The json plugin """
 
-    main_client_http_plugin = None
-    """ The main client http plugin """
+    client_http_plugin = None
+    """ The client http plugin """
 
     media_dashboard_structure = None
     """ The media dashboard structure """
@@ -118,20 +118,20 @@ class MediaDashboardClient:
     http_client = None
     """ The http client for the connection """
 
-    def __init__(self, json_plugin = None, main_client_http_plugin = None, media_dashboard_structure = None):
+    def __init__(self, json_plugin = None, client_http_plugin = None, media_dashboard_structure = None):
         """
         Constructor of the class.
 
         @type json_plugin: JsonPlugin
         @param json_plugin: The json plugin.
-        @type main_client_http_plugin: MainClientHttpPlugin
-        @param main_client_http_plugin: The main client http plugin.
+        @type client_http_plugin: ClientHttpPlugin
+        @param client_http_plugin: The client http plugin.
         @type media_dashboard_structure: MediaDashboardStructure
         @param media_dashboard_structure: The media dashboard structure.
         """
 
         self.json_plugin = json_plugin
-        self.main_client_http_plugin = main_client_http_plugin
+        self.client_http_plugin = client_http_plugin
         self.media_dashboard_structure = media_dashboard_structure
 
     def open(self):
@@ -354,7 +354,7 @@ class MediaDashboardClient:
             }
 
             # creates the http client
-            self.http_client = self.main_client_http_plugin.create_client(http_client_parameters)
+            self.http_client = self.client_http_plugin.create_client(http_client_parameters)
 
             # opens the http client
             self.http_client.open({})

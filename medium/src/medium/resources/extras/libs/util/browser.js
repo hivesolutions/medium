@@ -1,5 +1,5 @@
 // Hive Colony Framework
-// Copyright (C) 2008 Hive Solutions Lda.
+// Copyright (C) 2008-2012 Hive Solutions Lda.
 //
 // This file is part of Hive Colony Framework.
 //
@@ -20,7 +20,7 @@
 // __version__   = 1.0.0
 // __revision__  = $LastChangedRevision: 195 $
 // __date__      = $LastChangedDate: 2008-10-26 20:43:25 +0000 (dom, 26 Out 2008) $
-// __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
+// __copyright__ = Copyright (c) 2008-2012 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
 var BrowserDetect = BrowserDetect || {};

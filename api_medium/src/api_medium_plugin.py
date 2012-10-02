@@ -37,9 +37,9 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 import colony.base.system
 import colony.base.decorators
 
-class ApiMediumPlugin(colony.base.plugin_system.Plugin):
+class ApiMediumPlugin(colony.base.system.Plugin):
     """
-    The main class for the Media Dashboard Service plugin.
+    he main class for the Medium Api plugin
     """
 
     id = "pt.hive.hive_development.plugins.service.media_dashboard"
@@ -51,54 +51,50 @@ class ApiMediumPlugin(colony.base.plugin_system.Plugin):
     platforms = [
         colony.base.system.CPYTHON_ENVIRONMENT
     ]
-    attributes = {
-        "build_automation_file_path" : "$base{plugin_directory}/service_media_dashboard/media_dashboard/resources/baf.xml"
-    }
     capabilities = [
-        "service.media_dashboard",
-        "build_automation_item"
+        "api.medium"
     ]
     dependencies = [
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.main.client.http", "1.x.x"),
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.client.http", "1.x.x"),
         colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json", "1.x.x")
     ]
     main_modules = [
-        "service_media_dashboard.media_dashboard.service_media_dashboard_system"
+        "api_medium.system"
     ]
 
-    service_media_dashboard = None
-    """ The service media dashboard """
+    api_medium = None
+    """ The api medium """
 
-    main_client_http_plugin = None
-    """ The main client http plugin """
+    client_http_plugin = None
+    """ The client http plugin """
 
     json_plugin = None
     """ The json plugin """
 
     def load_plugin(self):
         colony.base.system.Plugin.load_plugin(self)
-        import service_media_dashboard.media_dashboard.service_media_dashboard_system
-        self.service_media_dashboard = service_media_dashboard.media_dashboard.service_media_dashboard_system.ServiceMediaDashboard(self)
+        import api_medium.system
+        self.api_medium = api_medium.system.ApiMedium(self)
 
     @colony.base.decorators.inject_dependencies
     def dependency_injected(self, plugin):
         colony.base.system.Plugin.dependency_injected(self, plugin)
 
-    def create_remote_client(self, service_attributes):
+    def create_client(self, api_attributes):
         """
-        Creates a remote client, with the given service attributes.
+        Creates a client, with the given api attributes.
 
-        @type service_attributes: Dictionary
-        @param service_attributes: The service attributes to be used.
-        @rtype: MediaDashboardClient
-        @return: The created remote client.
+        @type api_attributes: Dictionary
+        @param api_attributes: The api attributes to be used.
+        @rtype: EasypayClient
+        @return: The created client.
         """
 
-        return self.service_media_dashboard.create_remote_client(service_attributes)
+        return self.api_medium.create_client(api_attributes)
 
     @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.main.client.http")
-    def set_main_client_http_plugin(self, main_client_http_plugin):
-        self.main_client_http_plugin = main_client_http_plugin
+    def set_client_http_plugin(self, client_http_plugin):
+        self.client_http_plugin = client_http_plugin
 
     @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.misc.json")
     def set_json_plugin(self, json_plugin):
