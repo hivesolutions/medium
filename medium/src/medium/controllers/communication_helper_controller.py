@@ -38,7 +38,7 @@ import colony.libs.import_util
 
 controllers = colony.libs.import_util.__import__("controllers")
 
-class CommunicationHelperController:
+class CommunicationHelperController(controllers.Controller):
     """
     The communication helper controller.
     """

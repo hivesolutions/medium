@@ -52,7 +52,7 @@ class MediumPlugin(colony.base.system.Plugin):
         colony.base.system.CPYTHON_ENVIRONMENT
     ]
     capabilities = [
-        "web.mvc_service"
+        "mvc_service"
     ]
     dependencies = [
         colony.base.system.PluginDependency("pt.hive.colony.plugins.mvc.utils", "1.x.x"),
