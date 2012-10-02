@@ -1,0 +1,348 @@
+@charset "utf-8";
+
+/*
+ Hive Solutions Development
+ Copyright (C) 2010 Hive Solutions Lda.
+
+ This file is part of Hive Solutions Development.
+
+ Hive Solutions Development is confidential and property of Hive Solutions Lda.,
+ its usage is constrained by the terms of the Hive Solutions
+ Confidential Usage License.
+
+ Hive Solutions Development should not be distributed under any circumstances,
+ violation of this may imply legal action.
+
+ If you have any questions regarding the terms of this license please
+ refer to <http://www.hive.pt/licenses/>.
+*/
+
+/*
+ __author__    = João Magalhães <joamag@hive.pt>
+ __version__   = 1.0.0
+ __revision__  = $LastChangedRevision$
+ __date__      = $LastChangedDate$
+ __copyright__ = Copyright (c) 2010 Hive Solutions Lda.
+ __license__   = Hive Solutions Confidential Usage License (HSCUL)
+*/
+
+@font-face {
+    font-family: Rockwell;
+    src: local("Rockwell"), url(../fonts/rock.ttf);
+}
+
+@font-face {
+    font-family: Rockwell;
+    src: local("Rockwell Bold"), local("Rockwell-Bold"),  url(../fonts/rockb.ttf);
+    font-weight: bold;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Rockwell, "Lucida Grande", Tahoma, Arial, Sans-Serif;
+    font-size: 16pt;
+    height: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 1920px;
+}
+
+.clear {
+    clear: both;
+}
+
+.text {
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+.text-header {
+    font-size: 64pt;
+    font-weight: bold;
+}
+
+.text-message {
+    padding-left: 120px;
+}
+
+.yellow {
+    color: #fbbd15;
+}
+
+.purple {
+    color: #7753bf;
+}
+
+.blue {
+    color: #1379fc;
+}
+
+.green {
+    color: #29bc25;
+}
+
+.orange {
+    color: #f1662a;
+}
+
+.orange-background {
+    background-color: #f1662a;
+}
+
+.yellow-background {
+    background-color: #faa014;
+}
+
+.blue-background {
+    background-color: #439ced;
+}
+
+.white-background {
+    background-color: #ffffff;
+}
+
+.fields {
+    display: none;
+}
+
+.panel {
+    display: none;
+    height: 1080px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+}
+
+.title-container {
+    margin: 96px 0px 22px 0px;
+    text-align: center;
+}
+
+#main-panel {
+    display: block;
+}
+
+#timer {
+    float: right;
+    font-size: 38pt;
+    font-weight: bold;
+    height: 80px;
+    margin-right: 400px;
+}
+
+#main-wrapper {
+    height: 690px;
+    margin: 0px auto 0px auto;
+    padding-top: 250px;
+    width: 1400px;
+}
+
+#left {
+    border-right: 1px dashed #ffffff;
+    float: left;
+    width: 500px;
+}
+
+#right {
+    float: right;
+    width: 899px;
+}
+
+#message-wrapper {
+    height: 400px;
+    margin: 0px auto 0px auto;
+    padding-top: 300px;
+    width: 1000px;
+}
+
+#time-wrapper {
+    height: 400px;
+    margin: 0px auto 0px auto;
+    padding-top: 340px;
+    width: 900px;
+}
+
+#logo {
+    background: transparent url(../images/logo.png) no-repeat scroll 0px 0px;
+    height: 168px;
+    width: 348px;
+}
+
+#date-time {
+    margin-top: 188px;
+}
+
+#big-date-time {
+    color: #000000;
+}
+
+.date {
+    font-size: 26pt;
+    margin: 0px 0px 0px 0px;
+}
+
+.time {
+    font-size: 66pt;
+    font-weight: bold;
+}
+
+#second {
+    font-size: 46pt;
+    font-weight: bold;
+}
+
+.big-date {
+    font-size: 80pt;
+    margin: 0px 0px 0px 0px;
+}
+
+.big-time {
+    font-size: 200pt;
+    font-weight: bold;
+}
+
+#big-second {
+    font-size: 100pt;
+    font-weight: bold;
+}
+
+#commits {
+    float: left;
+    padding-left: 140px;
+}
+
+#bugs {
+    float: left;
+    padding-left: 140px;
+}
+
+#elcommitator {
+    padding: 60px 0px 0px 140px;
+}
+
+.header {
+    font-size: 38pt;
+    margin: 0px 0px 0px 0px;
+    text-transform: uppercase;
+}
+
+.sub-header {
+    font-size: 18pt;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.sub-header-commit {
+    font-size: 28pt;
+    font-weight: normal;
+    margin-left: 28px;
+    text-transform: uppercase;
+}
+
+.sub-header-ticker {
+    font-size: 18pt;
+    font-weight: normal;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+
+.stat {
+    font-size: 140pt;
+    font-weight: bold;
+}
+
+#ticker {
+    background-color: #1a1a1a;
+    height: 64px;
+    overflow: hidden;
+    padding-top: 26px;
+    width: 100%;
+}
+
+.icon-ticker {
+    float: left;
+    height: 42px;
+    margin: 0px 24px 0px 24px;
+    padding-left: 48px;
+}
+
+.icon-ticker.icon-ticker-error {
+    background: transparent url(../images/ticker-icon-error.png) no-repeat scroll 0px 6px;
+}
+
+.icon-ticker.icon-ticker-warning {
+    background: transparent url(../images/ticker-icon-warning.png) no-repeat scroll 0px 6px;
+}
+
+.icon-ticker.icon-ticker-information {
+    background: transparent url(../images/ticker-icon-information.png) no-repeat scroll 0px 6px;
+}
+
+.icon {
+    height: 100px;
+    padding-left: 120px;
+}
+
+.icon-error {
+    background: transparent url(../images/icon-error.png) no-repeat scroll 0px 0px;
+}
+
+.icon-warning {
+    background: transparent url(../images/icon-warning.png) no-repeat scroll 0px 0px;
+}
+
+.icon-information {
+    background: transparent url(../images/icon-information.png) no-repeat scroll 0px 0px;
+}
+
+.window {
+    border: 10px solid #ffffff;
+    position: absolute;
+}
+
+.message-box {
+    border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    opacity: 0.95;
+    width: 840px;
+}
+
+.message-box-contents {
+    padding: 60px 60px 60px 60px;
+}
+
+.video-box {
+    border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    height: 745px;
+    width: 1280px;
+}
+
+.error {
+    font-size: 32pt;
+    margin: 260px 0px 260px 0px;
+    text-align: center;
+}
+
+.error .message {
+    font-weight: bold;
+}
+
+.overlay {
+    background-color: #000000;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.75;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+    z-index: 2;
+}
+
+.chart-container {
+    text-align: center;
+}
