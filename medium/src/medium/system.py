@@ -65,10 +65,10 @@ class MediaDashboard:
         """
 
         # retrieves the web mvc utils plugin
-        web_mvc_utils_plugin = self.media_dashboard_plugin.web_mvc_utils_plugin
+        mvc_utils_plugin = self.media_dashboard_plugin.mvc_utils_plugin
 
         # creates the controllers and assigns them to the current instance
-        web_mvc_utils_plugin.assign_controllers(self, self.media_dashboard_plugin)
+        mvc_utils_plugin.assign_controllers(self, self.media_dashboard_plugin)
 
     def unload_components(self):
         """
@@ -77,10 +77,10 @@ class MediaDashboard:
         """
 
         # retrieves the web mvc utils plugin
-        web_mvc_utils_plugin = self.media_dashboard_plugin.web_mvc_utils_plugin
+        mvc_utils_plugin = self.media_dashboard_plugin.mvc_utils_plugin
 
         # destroys the controllers, unregistering them from the internal structures
-        web_mvc_utils_plugin.unassign_controllers(self)
+        mvc_utils_plugin.unassign_controllers(self)
 
     def get_patterns(self):
         """
