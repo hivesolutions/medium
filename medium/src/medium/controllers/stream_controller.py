@@ -45,17 +45,17 @@ MESSAGE_VALUE = "message"
 mvc_utils = colony.libs.import_util.__import__("mvc_utils")
 controllers = colony.libs.import_util.__import__("controllers")
 
-class CommunicationController(controllers.Controller):
+class StreamController(controllers.Controller):
     """
-    The medium communication controller.
+    The medium (communication) stream controller.
     """
 
-    def handle_data(self, rest_communication_request, parameters = {}):
+    def handle_data(self, rest_request, parameters = {}):
         """
         Handles the given data communication request.
 
-        @type rest_communication_request: RestRequest
-        @param rest_communication_request: The medium data rest
+        @type rest_request: RestRequest
+        @param rest_request: The medium data rest
         communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -63,12 +63,12 @@ class CommunicationController(controllers.Controller):
 
         pass
 
-    def handle_connection_changed(self, rest_communication_request, parameters = {}):
+    def handle_changed(self, rest_request, parameters = {}):
         """
-        Handles the given connection changed communication request.
+        Handles the given (connection) changed communication request.
 
-        @type rest_communication_request: RestRequest
-        @param rest_communication_request: The medium connection changed
+        @type rest_request: RestRequest
+        @param rest_request: The medium connection changed
         rest communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.

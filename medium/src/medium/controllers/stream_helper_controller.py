@@ -38,9 +38,9 @@ import colony.libs.import_util
 
 controllers = colony.libs.import_util.__import__("controllers")
 
-class CommunicationHelperController(controllers.Controller):
+class StreamHelperController(controllers.Controller):
     """
-    The communication helper controller.
+    The (communication) stream helper controller.
     """
 
     def send_serialized_broadcast_message(self, parameters, connection_name, message_id, message_contents):
