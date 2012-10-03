@@ -18,14 +18,6 @@
         <canvas id="commit-chart" class="chart" width="1680" height="900"></canvas>
     </div>
 </div>
-<div id="bargania-chart-panel" class="panel">
-    <div class="title-container" class="chart-container">
-        <p class="header yellow">bargania progress/<span class="sub-header">/7 days</span></p>
-    </div>
-    <div id="bargania-chart-container" class="chart-container">
-        <canvas id="bargania-chart" class="chart" width="1680" height="900"></canvas>
-    </div>
-</div>
 <div id="main-panel" class="panel">
     <div id="main-wrapper">
         <div id="left">

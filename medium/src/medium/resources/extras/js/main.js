@@ -27,9 +27,6 @@ jQuery(document).ready(function() {
             // retrieves the commits author week field
             var fieldCommitsAuthorWeek = jQuery("#field-commits_author_week");
 
-            // retrieves the bargania status week field
-            var fieldBarganiaStatusWeek = jQuery("#field-bargania_status_week");
-
             // starts the scheduler
             _body.scheduler();
 
@@ -80,18 +77,6 @@ jQuery(document).ready(function() {
                                 });
                     });
 
-            // registes for the set field event
-            _body.bind("set_field_bargania_status_week",
-                    function(event, key, value) {
-                        // retrieves the bargania chart element
-                        var barganiaChart = jQuery("#bargania-chart");
-
-                        // draws the bargania chart
-                        barganiaChart.weekchart({
-                                    value : value
-                                });
-                    });
-
             // updates the field commits author chart in case the field
             // is already set
             fieldCommitsAuthorWeek.each(function(index, element) {
@@ -106,24 +91,6 @@ jQuery(document).ready(function() {
 
                         // draws the commit chart
                         commitChart.weekchart({
-                                    value : elementContents
-                                });
-                    });
-
-            // updates the field bargnia status chart in case the field
-            // is already set
-            fieldBarganiaStatusWeek.each(function(index, element) {
-                        // retrieves the element
-                        var element = jQuery(this);
-
-                        // retrieves the element contents
-                        var elementContents = element.html();
-
-                        // retrieves the bargania chart element
-                        var barganiaChart = jQuery("#bargania-chart");
-
-                        // draws the bargania chart
-                        barganiaChart.weekchart({
                                     value : elementContents
                                 });
                     });
