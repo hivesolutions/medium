@@ -9,6 +9,6 @@
 <script type="text/javascript" src="${out_none value=base_path /}resources/libs/swfobject/swfobject-min.js"></script>
 <script type="text/javascript" src="${out_none value=base_path /}resources/libs/jquery_util/communication/js/communication.js"></script>
 <script type="text/javascript" src="${out_none value=base_path /}resources/libs/jquery_util_ui/chart/js/chart.js"></script>
-<script type="text/javascript" src="${out_none value=base_path /}resources/libs/util/canvas.js"></script>
+<script type="text/javascript" src="${out_none value=base_path /}resources/libs/util/ui/canvas.js"></script>
 <script type="text/javascript" src="${out_none value=base_path /}resources/js/plugins.js"></script>
 <script type="text/javascript" src="${out_none value=base_path /}resources/js/main.js"></script>
