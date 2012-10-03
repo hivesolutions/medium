@@ -59,16 +59,19 @@ class ApiMedium(colony.base.system.System):
     The api medium class.
     """
 
-    def create_remote_client(self, service_attributes, open_client = True):
+    def create_client(self, api_attributes, open_client = True):
         """
-        Creates a remote client, with the given service attributes.
+        Creates a client, with the given api attributes.
 
-        @type service_attributes: Dictionary
-        @param service_attributes: The service attributes to be used.
+        In case the open client flag is set the client is
+        immediately opened.
+
+        @type api_attributes: Dictionary
+        @param api_attributes: The api attributes to be used.
         @type open_client: bool
         @param open_client: If the client should be opened.
         @rtype: MediumClient
-        @return: The created remote client.
+        @return: The created client.
         """
 
         # retrieves the client http plugin
@@ -78,7 +81,7 @@ class ApiMedium(colony.base.system.System):
         json_plugin = self.api.json_plugin
 
         # retrieves the medium structure (if available)
-        medium_structure = service_attributes.get("medium_structure", None)
+        medium_structure = api_attributes.get("medium_structure", None)
 
         # creates a new medium client with the given options
         medium_client = MediumClient(json_plugin, client_http_plugin, medium_structure)
