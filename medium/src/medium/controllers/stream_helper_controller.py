@@ -43,26 +43,23 @@ class StreamHelperController(controllers.Controller):
     The (communication) stream helper controller.
     """
 
-    def send_serialized_broadcast_message(self, parameters, connection_name, message_id, message_contents):
-        # serializes the message using, sending the message id and the message contents
-        serialized_message = self._get_serialized_message(message_id, message_contents)
-
-        # sends the broadcast message
+    def send_broadcast(self, parameters, connection_name, message_id, message_contents):
+        # serializes the message using the message id and the message contents
+        # and uses the serialized message to send the broad cast message
+        serialized_message = self._get_serialized(message_id, message_contents)
         self.send_broadcast_message(parameters, connection_name, serialized_message)
 
-    def _get_serialized_message(self, message_id, message_contents):
+    def _get_serialized(self, message_id, message_contents):
         # retrieves the json plugin
         json_plugin = self.plugin.json_plugin
 
-        # creates the message map
+        # creates the message map and sets the message
+        # attributes in the message map
         message_map = {}
-
-        # sets the message attributes in the message map
         message_map["id"] = message_id
         message_map["contents"] = message_contents
 
-        # serializes the message map using the json plugin
+        # serializes the message map using the json plugin and
+        # returns the serialized message to the caller method
         serialized_message = json_plugin.dumps(message_map)
-
-        # returns the serialized message
         return serialized_message

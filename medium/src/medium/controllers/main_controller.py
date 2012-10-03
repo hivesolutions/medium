@@ -56,12 +56,12 @@ class MainController(controllers.Controller):
         self.ticker_messages_list = []
 
     @mvc_utils.serialize_exceptions("all")
-    def handle_media_index(self, rest_request, parameters = {}):
+    def handle_index(self, rest_request, parameters = {}):
         """
-        Handles the given media index rest request.
+        Handles the given index rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media index rest request to be handled.
+        @param rest_request: The index rest request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
         """
@@ -77,12 +77,12 @@ class MainController(controllers.Controller):
         self.process_set_contents(rest_request, template_file)
 
     @mvc_utils.serialize_exceptions("all")
-    def handle_media_field_serialized(self, rest_request, parameters = {}):
+    def handle_field_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given media field serialized rest request.
+        Handles the given field serialized rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media field serialized rest request
+        @param rest_request: The field serialized rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -109,7 +109,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_broadcast(
             parameters,
             "medium/communication",
             "medium/field/set",
@@ -119,12 +119,12 @@ class MainController(controllers.Controller):
         # sets the field in the fields map
         self.fields_map[key] = value
 
-    def handle_media_field_json(self, rest_request, parameters = {}):
+    def handle_field_json(self, rest_request, parameters = {}):
         """
-        Handles the given media field json rest request.
+        Handles the given field json rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media field json rest request
+        @param rest_request: The field json rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -137,16 +137,16 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
-        # handle media field serialized method
-        self.handle_media_field_serialized(rest_request, parameters)
+        # handle field serialized method
+        self.handle_field_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
-    def handle_media_message_serialized(self, rest_request, parameters = {}):
+    def handle_message_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given media message serialized rest request.
+        Handles the given message serialized rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media message serialized rest request
+        @param rest_request: The message serialized rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -173,19 +173,19 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_broadcast(
             parameters,
             "medium/communication",
             "medium/message/new",
             serialized_status
         )
 
-    def handle_media_message_json(self, rest_request, parameters = {}):
+    def handle_message_json(self, rest_request, parameters = {}):
         """
-        Handles the given media message json rest request.
+        Handles the given message json rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media message json rest request
+        @param rest_request: The message json rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -198,16 +198,16 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
-        # handle media message serialized method
-        self.handle_media_message_serialized(rest_request, parameters)
+        # handle message serialized method
+        self.handle_message_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
-    def handle_media_video_serialized(self, rest_request, parameters = {}):
+    def handle_video_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given media video serialized rest request.
+        Handles the given video serialized rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media video serialized rest request
+        @param rest_request: The video serialized rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -232,19 +232,19 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_broadcast(
             parameters,
             "medium/communication",
             "medium/video/new",
             serialized_status
         )
 
-    def handle_media_video_json(self, rest_request, parameters = {}):
+    def handle_video_json(self, rest_request, parameters = {}):
         """
-        Handles the given media video json rest request.
+        Handles the given video json rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media video json rest request
+        @param rest_request: The video json rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -257,16 +257,16 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
-        # handle media video serialized method
-        self.handle_media_video_serialized(rest_request, parameters)
+        # handle video serialized method
+        self.handle_video_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
-    def handle_media_ticker_message_serialized(self, rest_request, parameters = {}):
+    def handle_ticker_message_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given media ticker serialized message rest request.
+        Handles the given ticker serialized message rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media ticker message serialized rest request
+        @param rest_request: The ticker message serialized rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -295,7 +295,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_broadcast(
             parameters,
             "medium/communication",
             "medium/ticker_message/new",
@@ -305,12 +305,12 @@ class MainController(controllers.Controller):
         # adds the status to the ticker messages list
         self.ticker_messages_list.append(status)
 
-    def handle_media_ticker_message_json(self, rest_request, parameters = {}):
+    def handle_ticker_message_json(self, rest_request, parameters = {}):
         """
-        Handles the given media ticker message json rest request.
+        Handles the given ticker message json rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media ticker message json rest request
+        @param rest_request: The ticker message json rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -323,15 +323,15 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
-        # handle media ticker message serialized method
-        self.handle_media_ticker_message_serialized(rest_request, parameters)
+        # handle ticker message serialized method
+        self.handle_ticker_message_serialized(rest_request, parameters)
 
-    def handle_media_ticker_clear_serialized(self, rest_request, parameters = {}):
+    def handle_ticker_clear_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given media ticker serialized clear rest request.
+        Handles the given ticker serialized clear rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media ticker clear serialized rest request
+        @param rest_request: The ticker clear serialized rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -351,7 +351,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_broadcast(
             parameters,
             "medium/communication",
             "medium/ticker_message/clear",
@@ -361,12 +361,12 @@ class MainController(controllers.Controller):
         # clears the status to the ticker messages list
         self.ticker_messages_list = []
 
-    def handle_media_ticker_clear_json(self, rest_request, parameters = {}):
+    def handle_ticker_clear_json(self, rest_request, parameters = {}):
         """
-        Handles the given media ticker clear json rest request.
+        Handles the given ticker clear json rest request.
 
         @type rest_request: RestRequest
-        @param rest_request: The media ticker clear json rest request
+        @param rest_request: The ticker clear json rest request
         to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
@@ -379,5 +379,5 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
 
         # handles the request with the general
-        # handle media ticker clear serialized method
-        self.handle_media_ticker_clear_serialized(rest_request, parameters)
+        # handle ticker clear serialized method
+        self.handle_ticker_clear_serialized(rest_request, parameters)
