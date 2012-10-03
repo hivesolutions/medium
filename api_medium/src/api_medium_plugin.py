@@ -92,7 +92,7 @@ class ApiMediumPlugin(colony.base.system.Plugin):
 
         return self.api_medium.create_client(api_attributes)
 
-    @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.main.client.http")
+    @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.client.http")
     def set_client_http_plugin(self, client_http_plugin):
         self.client_http_plugin = client_http_plugin
 
