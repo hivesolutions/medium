@@ -92,7 +92,7 @@ class MainController(controllers.Controller):
         serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.system.communication_helper_controller
+        stream_helper_controller = self.system.stream_helper_controller
 
         # retrieves the key and value from the rest request
         key = self.get_field(rest_request, "key", "invalid")
@@ -109,7 +109,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_serialized_broadcast_message(
             parameters,
             "medium/communication",
             "medium/field/set",
@@ -156,7 +156,7 @@ class MainController(controllers.Controller):
         serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.system.communication_helper_controller
+        stream_helper_controller = self.system.stream_helper_controller
 
         # retrieves the message and type from the rest request
         value = self.get_field(rest_request, "value", "invalid")
@@ -173,7 +173,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_serialized_broadcast_message(
             parameters,
             "medium/communication",
             "medium/message/new",
@@ -217,7 +217,7 @@ class MainController(controllers.Controller):
         serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.system.communication_helper_controller
+        stream_helper_controller = self.system.stream_helper_controller
 
         # retrieves the video id from the rest request
         video_id = self.get_field(rest_request, "video_id", "invalid")
@@ -232,7 +232,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_serialized_broadcast_message(
             parameters,
             "medium/communication",
             "medium/video/new",
@@ -276,7 +276,7 @@ class MainController(controllers.Controller):
         serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.system.communication_helper_controller
+        stream_helper_controller = self.system.stream_helper_controller
 
         # retrieves the value, sub value and type from the rest request
         value = self.get_field(rest_request, "value", "invalid")
@@ -295,7 +295,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_serialized_broadcast_message(
             parameters,
             "medium/communication",
             "medium/ticker_message/new",
@@ -341,7 +341,7 @@ class MainController(controllers.Controller):
         serializer = parameters[mvc_utils.SERIALIZER_VALUE]
 
         # retrieves the required controllers
-        communication_helper_controller = self.system.communication_helper_controller
+        stream_helper_controller = self.system.stream_helper_controller
 
         # creates the status (map)
         status = {}
@@ -351,7 +351,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        communication_helper_controller.send_serialized_broadcast_message(
+        stream_helper_controller.send_serialized_broadcast_message(
             parameters,
             "medium/communication",
             "medium/ticker_message/clear",

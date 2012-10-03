@@ -98,7 +98,7 @@ class Medium(colony.base.system.System):
         """
 
         return (
-            (r"^medium/communication$", (self.communication_controller.handle_data, self.communication_controller.handle_connection_changed, "medium/communication")),
+            (r"^medium/communication$", (self.stream_controller.handle_data, self.stream_controller.handle_changed, "medium/communication")),
         )
 
     def get_resource_patterns(self):
