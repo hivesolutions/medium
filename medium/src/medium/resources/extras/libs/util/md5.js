@@ -18,8 +18,8 @@
 
 // __author__    = João Magalhães <joamag@hive.pt>
 // __version__   = 1.0.0
-// __revision__  = $LastChangedRevision: 9229 $
-// __date__      = $LastChangedDate: 2010-07-08 18:07:05 +0100 (qui, 08 Jul 2010) $
+// __revision__  = $LastChangedRevision$
+// __date__      = $LastChangedDate$
 // __copyright__ = Copyright (c) 2008-2012 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 // __credits__   = Joseph Myers <e_mayilme@hotmail.com>
