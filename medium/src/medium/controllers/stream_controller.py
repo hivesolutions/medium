@@ -55,8 +55,8 @@ class StreamController(controllers.Controller):
         Handles the given data communication request.
 
         @type rest_request: RestRequest
-        @param rest_request: The medium data rest
-        communication request to be handled.
+        @param rest_request: The rest (communication) request
+        to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
         """
@@ -68,8 +68,8 @@ class StreamController(controllers.Controller):
         Handles the given (connection) changed communication request.
 
         @type rest_request: RestRequest
-        @param rest_request: The medium connection changed
-        rest communication request to be handled.
+        @param rest_request: The rest (communication) request
+        to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
         """
