@@ -75,19 +75,17 @@ class ApiMedium(colony.base.system.System):
         """
 
         # retrieves the client http plugin
-        client_http_plugin = self.api.client_http_plugin
+        client_http_plugin = self.plugin.client_http_plugin
 
         # retrieves the json plugin
-        json_plugin = self.api.json_plugin
+        json_plugin = self.plugin.json_plugin
 
         # retrieves the medium structure (if available)
         medium_structure = api_attributes.get("medium_structure", None)
 
-        # creates a new medium client with the given options
+        # creates a new medium client with the given options and in
+        # case the is meant to be open open the client
         medium_client = MediumClient(json_plugin, client_http_plugin, medium_structure)
-
-        # in case the client is meant to be open
-        # open the client
         open_client and medium_client.open()
 
         # returns the medium client
@@ -138,10 +136,9 @@ class MediumClient:
         Closes the medium client.
         """
 
-        # in case an http client is defined
-        if self.http_client:
-            # closes the http client
-            self.http_client.close({})
+        # in case an http client is defined must close
+        # it in accordance with the specification
+        if self.http_client: self.http_client.close({})
 
     def generate_medium_structure(self, base_url, set_structure = True):
         """
@@ -155,9 +152,8 @@ class MediumClient:
         medium_structure = MediumStructure(base_url)
 
         # in case the structure is meant to be set
-        if set_structure:
-            # sets the medium structure
-            self.set_medium_structure(medium_structure)
+        # sets the medium structure
+        if set_structure: self.set_medium_structure(medium_structure)
 
         # returns the medium structure
         return medium_structure
@@ -174,25 +170,21 @@ class MediumClient:
         @return: The field information for the given field parameters.
         """
 
-        # retrieves the base url
+        # retrieves the base url from the medium structure and then
+        # uses it to construct the retrieval url by appending the
+        # current action suffix
         base_url = self.medium_structure.base_url
-
-        # sets the retrieval url
         retrieval_url = base_url + FIELD_URL_SUFFIX
 
-        # start the parameters map
+        # start the parameters map and then sets both the
+        # value and the type values in the parameters
         parameters = {}
-
-        # sets the key
         parameters["key"] = key
-
-        # sets the value
         parameters["value"] = value
 
-        # fetches the retrieval url with the given parameters retrieving the json
+        # fetches the retrieval url with the given parameters retrieving
+        # the json and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
-
-        # loads json retrieving the data
         data = self.json_plugin.loads(json)
 
         # returns the data
@@ -233,25 +225,21 @@ class MediumClient:
         @return: The message information for the given message parameters.
         """
 
-        # retrieves the base url
+        # retrieves the base url from the medium structure and then
+        # uses it to construct the retrieval url by appending the
+        # current action suffix
         base_url = self.medium_structure.base_url
-
-        # sets the retrieval url
         retrieval_url = base_url + MESSAGE_URL_SUFFIX
 
-        # start the parameters map
+        # start the parameters map and then sets both the
+        # value and the type values in the parameters
         parameters = {}
-
-        # sets the value
         parameters["value"] = value
-
-        # sets the type
         parameters["type"] = type
 
-        # fetches the retrieval url with the given parameters retrieving the json
+        # fetches the retrieval url with the given parameters retrieving
+        # the json and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
-
-        # loads json retrieving the data
         data = self.json_plugin.loads(json)
 
         # returns the data
@@ -312,18 +300,16 @@ class MediumClient:
         @return: The fetched data.
         """
 
-        # in case parameters is not defined
-        if not parameters:
-            # creates a new parameters map
-            parameters = {}
+        # in case parameters is not defined must create a new
+        # parameters map to be used
+        if not parameters: parameters = {}
 
         # retrieves the http client
         http_client = self._get_http_client()
 
-        # fetches the url retrieving the http response
+        # fetches the url retrieving the http response and then
+        # retrieves the received message as the contents response
         http_response = http_client.fetch_url(url, method, parameters, content_type_charset = DEFAULT_CHARSET)
-
-        # retrieves the contents from the http response
         contents = http_response.received_message
 
         # returns the contents
