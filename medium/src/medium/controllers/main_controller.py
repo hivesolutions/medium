@@ -109,7 +109,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast(
+        stream_helper_controller.send_broadcast_s(
             parameters,
             "medium/communication",
             "medium/field/set",
@@ -173,7 +173,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast(
+        stream_helper_controller.send_broadcast_s(
             parameters,
             "medium/communication",
             "medium/message/new",
@@ -232,7 +232,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast(
+        stream_helper_controller.send_broadcast_s(
             parameters,
             "medium/communication",
             "medium/video/new",
@@ -295,7 +295,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast(
+        stream_helper_controller.send_broadcast_s(
             parameters,
             "medium/communication",
             "medium/ticker_message/new",
@@ -351,7 +351,7 @@ class MainController(controllers.Controller):
         self.set_contents(rest_request, serialized_status)
 
         # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast(
+        stream_helper_controller.send_broadcast_s(
             parameters,
             "medium/communication",
             "medium/ticker_message/clear",
