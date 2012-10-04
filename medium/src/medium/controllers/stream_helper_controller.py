@@ -47,7 +47,7 @@ class StreamHelperController(controllers.Controller):
         # serializes the message using the message id and the message contents
         # and uses the serialized message to send the broad cast message
         serialized_message = self._get_serialized(message_id, message_contents)
-        self.send_broadcast_message(parameters, connection_name, serialized_message)
+        self.send_broadcast(parameters, connection_name, serialized_message)
 
     def _get_serialized(self, message_id, message_contents):
         # retrieves the json plugin
