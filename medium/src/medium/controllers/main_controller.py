@@ -105,15 +105,19 @@ class MainController(controllers.Controller):
         }
 
         # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
         serialized_status = serializer.dumps(status)
-        self.set_contents(rest_request, serialized_status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
 
-        # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast_s(
+        # sends the serialized message to the public
+        # channel (non secure)
+        stream_helper_controller.send_s(
             parameters,
             "medium/communication",
             "medium/field/set",
-            serialized_status
+            serialized_status,
+            channels = ("public",)
         )
 
         # sets the field in the fields map
@@ -168,16 +172,20 @@ class MainController(controllers.Controller):
             "type" : type
         }
 
-        # serializes status and sets it as the rest request contents
+        # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
         serialized_status = serializer.dumps(status)
-        self.set_contents(rest_request, serialized_status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
 
-        # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast_s(
+        # sends the serialized message to the public
+        # channel (non secure)
+        stream_helper_controller.send_s(
             parameters,
             "medium/communication",
             "medium/message/new",
-            serialized_status
+            serialized_status,
+            channels = ("public",)
         )
 
     def handle_message_json(self, rest_request, parameters = {}):
@@ -228,15 +236,19 @@ class MainController(controllers.Controller):
         }
 
         # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
         serialized_status = serializer.dumps(status)
-        self.set_contents(rest_request, serialized_status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
 
-        # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast_s(
+        # sends the serialized message to the public
+        # channel (non secure)
+        stream_helper_controller.send_s(
             parameters,
             "medium/communication",
             "medium/video/new",
-            serialized_status
+            serialized_status,
+            channels = ("public",)
         )
 
     def handle_video_json(self, rest_request, parameters = {}):
@@ -291,15 +303,19 @@ class MainController(controllers.Controller):
         }
 
         # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
         serialized_status = serializer.dumps(status)
-        self.set_contents(rest_request, serialized_status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
 
-        # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast_s(
+        # sends the serialized message to the public
+        # channel (non secure)
+        stream_helper_controller.send_s(
             parameters,
             "medium/communication",
             "medium/ticker_message/new",
-            serialized_status
+            serialized_status,
+            channels = ("public",)
         )
 
         # adds the status to the ticker messages list
@@ -347,15 +363,19 @@ class MainController(controllers.Controller):
         status = {}
 
         # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
         serialized_status = serializer.dumps(status)
-        self.set_contents(rest_request, serialized_status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
 
-        # sends the serialized broadcast message
-        stream_helper_controller.send_broadcast_s(
+        # sends the serialized message to the public
+        # channel (non secure)
+        stream_helper_controller.send_s(
             parameters,
             "medium/communication",
             "medium/ticker_message/clear",
-            serialized_status
+            serialized_status,
+            channels = ("public",)
         )
 
         # clears the status to the ticker messages list

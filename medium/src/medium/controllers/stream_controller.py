@@ -74,4 +74,25 @@ class StreamController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        pass
+        # retrieves the name of the operation to be processed
+        # resulting from a change in the communication system
+        operation = parameters.get("operation", None)
+        if not operation: return
+
+        # uses the name of the operation to route the call properly
+        # based on the prefix of the method
+        method = getattr(self, "handle_" + operation)
+        method(rest_request, parameters)
+
+    def handle_channel(self, rest_request, parameters = {}):
+        # retrieves the name of the channel for which the
+        # authentication process must be executed
+        channel = parameters.get("channel", None)
+
+        # in case the current channel is part of the public
+        # channels sequence returns immediately (allowed)
+        if channel == "public": return
+
+        # raises a runtime error indicating the problem in the
+        # handling of the validation of the channel association
+        raise RuntimeError("Problem while registering channel: '%s'" % channel)

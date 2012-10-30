@@ -43,9 +43,15 @@ class StreamHelperController(controllers.Controller):
     The (communication) stream helper controller.
     """
 
+    def send_s(self, parameters, connection_name, message_id, message, channels = ()):
+        # serializes the message using the message id and the message (contents)
+        # and uses the serialized message to send the unicast message
+        serialized_message = self._get_serialized(message_id, message)
+        self.send(parameters, connection_name, serialized_message, channels = channels)
+
     def send_broadcast_s(self, parameters, connection_name, message_id, message):
         # serializes the message using the message id and the message (contents)
-        # and uses the serialized message to send the broad cast message
+        # and uses the serialized message to send the broadcast message
         serialized_message = self._get_serialized(message_id, message)
         self.send_broadcast(parameters, connection_name, serialized_message)
 
