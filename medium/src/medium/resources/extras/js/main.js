@@ -39,6 +39,7 @@ jQuery(document).ready(function() {
             // starts the communication
             _body.communication("default", {
                         url : "communication",
+                        channels : ["public"],
                         timeout : 500,
                         dataCallbackFunctions : [messageProcessor]
                     });
