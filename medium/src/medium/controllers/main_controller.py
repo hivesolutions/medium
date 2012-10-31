@@ -342,9 +342,10 @@ class MainController(controllers.Controller):
         # handle ticker message serialized method
         self.handle_ticker_message_serialized(rest_request, parameters)
 
+    @mvc_utils.serialize_exceptions("all")
     def handle_ticker_clear_serialized(self, rest_request, parameters = {}):
         """
-        Handles the given ticker serialized clear rest request.
+        Handles the given ticker clear serialized rest request.
 
         @type rest_request: RestRequest
         @param rest_request: The ticker clear serialized rest request
@@ -401,3 +402,63 @@ class MainController(controllers.Controller):
         # handles the request with the general
         # handle ticker clear serialized method
         self.handle_ticker_clear_serialized(rest_request, parameters)
+
+    @mvc_utils.serialize_exceptions("all")
+    def handle_register_serialized(self, rest_request, parameters = {}):
+        """
+        Handles the given register serialized rest request.
+
+        @type rest_request: RestRequest
+        @param rest_request: The register serialized rest request
+        to be handled.
+        @type parameters: Dictionary
+        @param parameters: The handler parameters.
+        """
+
+        # retrieves the serializer
+        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
+
+        # creates a new connection and adds the print handler
+        # to it so that it becomes verbose
+        connection = self.new_connection(
+            parameters,
+            "medium/communication",
+            channels = ("public",)
+        )
+        connection.add_print_handler()
+
+        # retrieves the identifier of the connection that
+        # was just created, to be sent to the client
+        connection_id = connection.get_connection_id()
+
+        # creates the status (map)
+        status = {
+            "id" : connection_id
+        }
+
+        # serializes the status and sets it as the rest request contents
+        # along with the mime type associated with the serializer
+        serialized_status = serializer.dumps(status)
+        mime_type = serializer.get_mime_type()
+        self.set_contents(rest_request, serialized_status, content_type = mime_type)
+
+    def handle_register_json(self, rest_request, parameters = {}):
+        """
+        Handles the given register json rest request.
+
+        @type rest_request: RestRequest
+        @param rest_request: The register json rest request
+        to be handled.
+        @type parameters: Dictionary
+        @param parameters: The handler parameters.
+        """
+
+        # retrieves the json plugin
+        json_plugin = self.plugin.json_plugin
+
+        # sets the serializer in the parameters
+        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
+
+        # handles the request with the general
+        # handle register serialized method
+        self.handle_register_serialized(rest_request, parameters)
