@@ -50,26 +50,24 @@ class StreamController(controllers.Controller):
     The medium (communication) stream controller.
     """
 
-    def handle_data(self, rest_request, parameters = {}):
+    def handle_data(self, request, parameters = {}):
         """
         Handles the given data communication request.
 
-        @type rest_request: RestRequest
-        @param rest_request: The rest (communication) request
-        to be handled.
+        @type request: Request
+        @param request: The communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
         """
 
         pass
 
-    def handle_changed(self, rest_request, parameters = {}):
+    def handle_changed(self, request, parameters = {}):
         """
         Handles the given (connection) changed communication request.
 
-        @type rest_request: RestRequest
-        @param rest_request: The rest (communication) request
-        to be handled.
+        @type request: Request
+        @param request: The communication request to be handled.
         @type parameters: Dictionary
         @param parameters: The handler parameters.
         """
@@ -82,9 +80,9 @@ class StreamController(controllers.Controller):
         # uses the name of the operation to route the call properly
         # based on the prefix of the method
         method = getattr(self, "handle_" + operation)
-        method(rest_request, parameters)
+        method(request, parameters)
 
-    def handle_channel(self, rest_request, parameters = {}):
+    def handle_channel(self, request, parameters = {}):
         # retrieves the name of the channel for which the
         # authentication process must be executed
         channel = parameters.get("channel", None)
