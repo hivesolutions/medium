@@ -36,12 +36,6 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony.libs.import_util
 
-EXCEPTION_VALUE = "exception"
-""" The exception value """
-
-MESSAGE_VALUE = "message"
-""" The message value """
-
 mvc_utils = colony.libs.import_util.__import__("mvc_utils")
 controllers = colony.libs.import_util.__import__("controllers")
 
