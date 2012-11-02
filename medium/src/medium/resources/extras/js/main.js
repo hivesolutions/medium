@@ -144,6 +144,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
+
         case "medium/video/new" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
@@ -156,6 +157,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
+
         case "medium/ticker_message/new" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
@@ -174,6 +176,7 @@ var messageProcessor = function(data) {
 
             // breaks the switch
             break;
+
         case "medium/ticker_message/clear" :
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
