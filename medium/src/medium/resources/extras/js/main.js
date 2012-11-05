@@ -44,29 +44,29 @@ jQuery(document).ready(function() {
                         dataCallbackFunctions : [messageProcessor]
                     });
 
-            // registes for the communication connected event
-            _body.bind("communication_connected", function() {
+            // registers for the stream connected event
+            _body.bind("stream_connected", function() {
                         // hides the error message
                         _body.error("hide");
                     });
 
-            // registes for the communication disconnected event
-            _body.bind("communication_disconnected", function() {
+            // registers for the stream disconnected event
+            _body.bind("stream_disconnected", function() {
                         // shows the error message
                         _body.error("show", {
                                     "message" : "Disconnected from server"
                                 });
                     });
 
-            // registes for the communication error event
-            _body.bind("communication_error", function() {
+            // registers for the stream error event
+            _body.bind("stream_error", function() {
                         // shows the error message
                         _body.error("show", {
                                     "message" : "Error communicating with server"
                                 });
                     });
 
-            // registes for the set field event
+            // registers for the set field event
             _body.bind("set_field_commits_author_week",
                     function(event, key, value) {
                         // retrieves the commit chart element
