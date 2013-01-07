@@ -41,7 +41,7 @@ jQuery(document).ready(function() {
                         url : "communication",
                         channels : ["public"],
                         timeout : 500,
-                        dataCallbackFunctions : [messageProcessor]
+                        callbacks : [messageProcessor]
                     });
 
             // registers for the stream connected event
