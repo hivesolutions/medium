@@ -134,14 +134,11 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle field serialized method
         self.handle_field_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
@@ -199,14 +196,11 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle message serialized method
         self.handle_message_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
@@ -262,14 +256,11 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle video serialized method
         self.handle_video_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
@@ -332,14 +323,11 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle ticker message serialized method
         self.handle_ticker_message_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
@@ -393,14 +381,11 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle ticker clear serialized method
         self.handle_ticker_clear_serialized(rest_request, parameters)
 
     @mvc_utils.serialize_exceptions("all")
@@ -426,6 +411,11 @@ class MainController(controllers.Controller):
             channels = ("public",)
         )
         connection.add_print_handler()
+        connection.add_apn_handler(
+            "12007EF74A0E8518EAB44CA4922B49FD4002462AFB37D7D9890A7E02D81FD24B",
+            key_file = "c:/apn_key.pem",
+            cert_file = "c:/apn_cert.pem"
+        )
 
         # retrieves the identifier of the connection that
         # was just created, to be sent to the client
@@ -453,12 +443,9 @@ class MainController(controllers.Controller):
         @param parameters: The handler parameters.
         """
 
-        # retrieves the json plugin
+        # retrieves the json plugin sets it as the serializer
+        # object for the current request then redirects the request
+        # to the general serialized method
         json_plugin = self.plugin.json_plugin
-
-        # sets the serializer in the parameters
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-
-        # handles the request with the general
-        # handle register serialized method
         self.handle_register_serialized(rest_request, parameters)
