@@ -33,8 +33,8 @@
 
 @font-face {
     font-family: Rockwell;
-    src: local("Rockwell Bold"), local("Rockwell-Bold"),  url(../fonts/rockb.ttf);
     font-weight: bold;
+    src: local("Rockwell Bold"), local("Rockwell-Bold"),  url(../fonts/rockb.ttf);
 }
 
 body {
