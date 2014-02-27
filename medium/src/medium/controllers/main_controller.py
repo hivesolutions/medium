@@ -55,7 +55,7 @@ class MainController(controllers.Controller):
         self.fields_map = {}
         self.ticker_messages_list = []
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_index(self, rest_request, parameters = {}):
         """
         Handles the given index rest request.
@@ -76,7 +76,7 @@ class MainController(controllers.Controller):
         template_file.assign("ticker_messages", self.ticker_messages_list)
         self.process_set_contents(rest_request, template_file)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_field_serialized(self, rest_request, parameters = {}):
         """
         Handles the given field serialized rest request.
@@ -141,7 +141,7 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
         self.handle_field_serialized(rest_request, parameters)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_message_serialized(self, rest_request, parameters = {}):
         """
         Handles the given message serialized rest request.
@@ -203,7 +203,7 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
         self.handle_message_serialized(rest_request, parameters)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_video_serialized(self, rest_request, parameters = {}):
         """
         Handles the given video serialized rest request.
@@ -263,7 +263,7 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
         self.handle_video_serialized(rest_request, parameters)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_ticker_message_serialized(self, rest_request, parameters = {}):
         """
         Handles the given ticker serialized message rest request.
@@ -330,7 +330,7 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
         self.handle_ticker_message_serialized(rest_request, parameters)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_ticker_clear_serialized(self, rest_request, parameters = {}):
         """
         Handles the given ticker clear serialized rest request.
@@ -388,7 +388,7 @@ class MainController(controllers.Controller):
         parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
         self.handle_ticker_clear_serialized(rest_request, parameters)
 
-    @mvc_utils.serialize("all")
+    @mvc_utils.serialize
     def handle_register_serialized(self, rest_request, parameters = {}):
         """
         Handles the given register serialized rest request.
