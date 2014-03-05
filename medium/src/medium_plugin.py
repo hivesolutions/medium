@@ -54,8 +54,8 @@ class MediumPlugin(colony.base.system.Plugin):
         "mvc_service"
     ]
     dependencies = [
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.mvc.utils", "1.x.x"),
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json", "1.x.x")
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.mvc.utils"),
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json")
     ]
     main_modules = [
         "medium.system"
