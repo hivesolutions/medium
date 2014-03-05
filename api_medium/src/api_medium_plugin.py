@@ -54,8 +54,8 @@ class ApiMediumPlugin(colony.base.system.Plugin):
         "api.medium"
     ]
     dependencies = [
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.client.http", "1.x.x"),
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json", "1.x.x")
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.client.http"),
+        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json")
     ]
     main_modules = [
         "api_medium.system"
