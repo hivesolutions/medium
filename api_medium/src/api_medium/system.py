@@ -34,27 +34,9 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import colony.base.system
+import colony
 
-DEFAULT_CHARSET = "utf-8"
-""" The default charset """
-
-GET_METHOD_VALUE = "GET"
-""" The get method value """
-
-POST_METHOD_VALUE = "POST"
-""" The post method value """
-
-CONTENT_TYPE_CHARSET_VALUE = "content_type_charset"
-""" The content type charset value """
-
-FIELD_URL_SUFFIX = "field.json"
-""" The suffix for the field url """
-
-MESSAGE_URL_SUFFIX = "message.json"
-""" The suffix for the message url """
-
-class ApiMedium(colony.base.system.System):
+class ApiMedium(colony.System):
     """
     The api medium class.
     """
@@ -174,7 +156,7 @@ class MediumClient:
         # uses it to construct the retrieval url by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
-        retrieval_url = base_url + FIELD_URL_SUFFIX
+        retrieval_url = base_url + "field.json"
 
         # start the parameters map and then sets both the
         # value and the type values in the parameters
@@ -229,7 +211,7 @@ class MediumClient:
         # uses it to construct the retrieval url by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
-        retrieval_url = base_url + MESSAGE_URL_SUFFIX
+        retrieval_url = base_url + "message.json"
 
         # start the parameters map and then sets both the
         # value and the type values in the parameters
@@ -281,12 +263,12 @@ class MediumClient:
         http_client = self._get_http_client()
 
         # build the url from the base url
-        url = http_client.build_url(base_url, GET_METHOD_VALUE, parameters)
+        url = http_client.build_url(base_url, "GET", parameters)
 
         # returns the built url
         return url
 
-    def _fetch_url(self, url, parameters = None, method = GET_METHOD_VALUE):
+    def _fetch_url(self, url, parameters = None, method = "GET"):
         """
         Fetches the given url for the given parameters and using the given method.
 
@@ -309,7 +291,7 @@ class MediumClient:
 
         # fetches the url retrieving the http response and then
         # retrieves the received message as the contents response
-        http_response = http_client.fetch_url(url, method, parameters, content_type_charset = DEFAULT_CHARSET)
+        http_response = http_client.fetch_url(url, method, parameters, content_type_charset = "utf-8")
         contents = http_response.received_message
 
         # returns the contents
@@ -328,7 +310,7 @@ class MediumClient:
         if not self.http_client:
             # creates the http client parameters
             http_client_parameters = {
-                CONTENT_TYPE_CHARSET_VALUE : DEFAULT_CHARSET
+                "content_type_charset" : "utf-8"
             }
 
             # creates the http client
