@@ -58,7 +58,7 @@ class MediumPlugin(colony.base.system.Plugin):
         colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json")
     ]
     main_modules = [
-        "medium.system"
+        "medium"
     ]
 
     medium = None
