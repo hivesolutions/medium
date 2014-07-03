@@ -73,7 +73,7 @@ class ApiMedium(colony.System):
         # returns the medium client
         return medium_client
 
-class MediumClient:
+class MediumClient(object):
     """
     The class that represents a medium client connection.
     """
