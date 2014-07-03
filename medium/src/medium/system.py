@@ -79,13 +79,13 @@ class Medium(colony.base.system.System):
         """
 
         return (
-            (r"medium/?", self.main_controller.handle_index, "get"),
-            (r"medium/field", self.main_controller.handle_field_json, "get", "json"),
-            (r"medium/message", self.main_controller.handle_message_json, "get", "json"),
-            (r"medium/video", self.main_controller.handle_video_json, "get", "json"),
-            (r"medium/ticker_message", self.main_controller.handle_ticker_message_json, "get", "json"),
-            (r"medium/ticker_clear", self.main_controller.handle_ticker_clear_json, "get", "json"),
-            (r"medium/register", self.main_controller.handle_register_json, "get", "json")
+            (r"medium/?", self.main_controller.index, "get"),
+            (r"medium/field", self.main_controller.field_serialized, "get", "json"),
+            (r"medium/message", self.main_controller.message_serialized, "get", "json"),
+            (r"medium/video", self.main_controller.video_serialized, "get", "json"),
+            (r"medium/ticker_message", self.main_controller.ticker_message_serialized, "get", "json"),
+            (r"medium/ticker_clear", self.main_controller.ticker_clear_serialized, "get", "json"),
+            (r"medium/register", self.main_controller.register_serialized, "get", "json")
         )
 
     def get_communication_patterns(self):

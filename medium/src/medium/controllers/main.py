@@ -43,10 +43,12 @@ mvc_utils = colony.__import__("mvc_utils")
 class MainController(base.BaseController):
 
     fields_map = {}
-    """ The map containing the filed values """
+    """ The map containing the field values, these
+    should be a key to value association of strings """
 
     ticker_messages_list = []
-    """ The list containing the ticker messages """
+    """ The list containing the ticker messages the
+    strings contained in the list should be valid unicode """
 
     def __init__(self, plugin, system):
         base.BaseController.__init__(self, plugin, system)
@@ -54,353 +56,92 @@ class MainController(base.BaseController):
         self.ticker_messages_list = []
 
     @mvc_utils.serialize
-    def handle_index(self, rest_request, parameters = {}):
-        """
-        Handles the given index rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The index rest request to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # processes the contents of the template file assigning the
-        # appropriate values to it
-        template_file = self.retrieve_template_file(
-            "general.html.tpl",
-            partial_page = "index_contents.html.tpl"
+    def index(self, request):
+        self._template(
+            request = request,
+            partial_page = "index_contents.html.tpl",
+            fields_map = self.fields_map,
+            ticker_messages = self.ticker_messages_list
         )
-        template_file.assign("fields_map", self.fields_map)
-        template_file.assign("ticker_messages", self.ticker_messages_list)
-        self.process_set_contents(rest_request, template_file)
 
     @mvc_utils.serialize
-    def handle_field_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given field serialized rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The field serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
-        # retrieves the required controllers
+    def field_serialized(self, request):
         stream_helper_controller = self.system.stream_helper_controller
-
-        # retrieves the key and value from the rest request
-        key = self.get_field(rest_request, "key", "invalid")
-        value = self.get_field(rest_request, "value", "invalid")
-
-        # creates the status (map)
-        status = {
-            "key" : key,
-            "value" : value
-        }
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-        # sends the serialized message to the public
-        # channel (non secure)
+        key = request.field("key", "invalid")
+        value = request.field("value", "invalid")
+        status = dict(key = key, value = value)
+        result = self.serialize(request, status)
         stream_helper_controller.send_s(
-            parameters,
+            request,
             "medium/communication",
             "medium/field/set",
-            serialized_status,
+            result,
             channels = ("public",)
         )
-
-        # sets the field in the fields map
         self.fields_map[key] = value
 
-    def handle_field_json(self, rest_request, parameters = {}):
-        """
-        Handles the given field json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The field json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_field_serialized(rest_request, parameters)
-
     @mvc_utils.serialize
-    def handle_message_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given message serialized rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The message serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
-        # retrieves the required controllers
+    def message_serialized(self, request):
         stream_helper_controller = self.system.stream_helper_controller
-
-        # retrieves the message and type from the rest request
-        value = self.get_field(rest_request, "value", "invalid")
-        type = self.get_field(rest_request, "type", "information")
-
-        # creates the status (map)
-        status = {
-            "value" : value,
-            "type" : type
-        }
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-        # sends the serialized message to the public
-        # channel (non secure)
+        value = request.field("value", "invalid")
+        type = request.field("type", "information")
+        status = dict(value = value, type = type)
+        result = self.serialize(request, status)
         stream_helper_controller.send_s(
-            parameters,
+            request,
             "medium/communication",
             "medium/message/new",
-            serialized_status,
+            result,
             channels = ("public",)
         )
 
-    def handle_message_json(self, rest_request, parameters = {}):
-        """
-        Handles the given message json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The message json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_message_serialized(rest_request, parameters)
-
     @mvc_utils.serialize
-    def handle_video_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given video serialized rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The video serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
-        # retrieves the required controllers
+    def video_serialized(self, request):
         stream_helper_controller = self.system.stream_helper_controller
-
-        # retrieves the video id from the rest request
-        video_id = self.get_field(rest_request, "video_id", "invalid")
-
-        # creates the status (map)
-        status = {
-            "video_id" : video_id
-        }
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-        # sends the serialized message to the public
-        # channel (non secure)
+        video_id = request.field("video_id", "invalid")
+        status = dict(video_id = video_id)
+        result = self.serialize(request, status)
         stream_helper_controller.send_s(
-            parameters,
+            request,
             "medium/communication",
             "medium/video/new",
-            serialized_status,
+            result,
             channels = ("public",)
         )
 
-    def handle_video_json(self, rest_request, parameters = {}):
-        """
-        Handles the given video json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The video json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_video_serialized(rest_request, parameters)
-
     @mvc_utils.serialize
-    def handle_ticker_message_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given ticker serialized message rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The ticker message serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
-        # retrieves the required controllers
+    def ticker_message_serialized(self, request):
         stream_helper_controller = self.system.stream_helper_controller
-
-        # retrieves the value, sub value and type from the rest request
-        value = self.get_field(rest_request, "value", "invalid")
-        type = self.get_field(rest_request, "type", "information")
-        sub_value = self.get_field(rest_request, "sub_value", "")
-
-        # creates the status (map)
-        status = {
-            "value" : value,
-            "type" : type,
-            "sub_value" : sub_value
-        }
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-        # sends the serialized message to the public
-        # channel (non secure)
+        value = request.field("value", "invalid")
+        type = request.field("type", "information")
+        sub_value = request.field("sub_value", "")
+        status = dict(value = value, type = type, sub_value = sub_value)
+        result = self.serialize(request, status)
         stream_helper_controller.send_s(
-            parameters,
+            request,
             "medium/communication",
             "medium/ticker_message/new",
-            serialized_status,
+            result,
             channels = ("public",)
         )
-
-        # adds the status to the ticker messages list
         self.ticker_messages_list.append(status)
 
-    def handle_ticker_message_json(self, rest_request, parameters = {}):
-        """
-        Handles the given ticker message json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The ticker message json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_ticker_message_serialized(rest_request, parameters)
-
     @mvc_utils.serialize
-    def handle_ticker_clear_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given ticker clear serialized rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The ticker clear serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
-        # retrieves the required controllers
+    def ticker_clear_serialized(self, request):
         stream_helper_controller = self.system.stream_helper_controller
-
-        # creates the status (map)
-        status = {}
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-        # sends the serialized message to the public
-        # channel (non secure)
+        status = dict()
+        result = self.serialize(request, status)
         stream_helper_controller.send_s(
-            parameters,
+            request,
             "medium/communication",
             "medium/ticker_message/clear",
-            serialized_status,
+            result,
             channels = ("public",)
         )
-
-        # clears the status to the ticker messages list
         self.ticker_messages_list = []
 
-    def handle_ticker_clear_json(self, rest_request, parameters = {}):
-        """
-        Handles the given ticker clear json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The ticker clear json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_ticker_clear_serialized(rest_request, parameters)
-
     @mvc_utils.serialize
-    def handle_register_serialized(self, rest_request, parameters = {}):
-        """
-        Handles the given register serialized rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The register serialized rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the serializer
-        serializer = parameters[mvc_utils.SERIALIZER_VALUE]
-
+    def register_serialized(self, request, parameters = {}):
         # creates a new connection and adds the print handler
         # to it so that it becomes verbose
         connection = self.new_connection(
@@ -420,30 +161,5 @@ class MainController(base.BaseController):
         connection_id = connection.get_connection_id()
 
         # creates the status (map)
-        status = {
-            "id" : connection_id
-        }
-
-        # serializes the status and sets it as the rest request contents
-        # along with the mime type associated with the serializer
-        serialized_status = serializer.dumps(status)
-        mime_type = serializer.get_mime_type()
-        self.set_contents(rest_request, serialized_status, content_type = mime_type)
-
-    def handle_register_json(self, rest_request, parameters = {}):
-        """
-        Handles the given register json rest request.
-
-        @type rest_request: RestRequest
-        @param rest_request: The register json rest request
-        to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
-        # retrieves the json plugin sets it as the serializer
-        # object for the current request then redirects the request
-        # to the general serialized method
-        json_plugin = self.plugin.json_plugin
-        parameters[mvc_utils.SERIALIZER_VALUE] = json_plugin
-        self.handle_register_serialized(rest_request, parameters)
+        status = dict(id = connection_id)
+        self.serialize(request, status)

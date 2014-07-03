@@ -38,17 +38,17 @@ import base
 
 class StreamHelperController(base.BaseController):
 
-    def send_s(self, parameters, connection_name, message_id, message, channels = ()):
+    def send_s(self, request, connection_name, message_id, message, channels = ()):
         # serializes the message using the message id and the message (contents)
         # and uses the serialized message to send the unicast message
         serialized_message = self._get_serialized(message_id, message)
-        self.send(parameters, connection_name, serialized_message, channels = channels)
+        self.send(request.parameters, connection_name, serialized_message, channels = channels)
 
-    def send_broadcast_s(self, parameters, connection_name, message_id, message):
+    def send_broadcast_s(self, request, connection_name, message_id, message):
         # serializes the message using the message id and the message (contents)
         # and uses the serialized message to send the broadcast message
         serialized_message = self._get_serialized(message_id, message)
-        self.send_broadcast(parameters, connection_name, serialized_message)
+        self.send_broadcast(request.parameters, connection_name, serialized_message)
 
     def _get_serialized(self, message_id, message_contents):
         # retrieves the json plugin
