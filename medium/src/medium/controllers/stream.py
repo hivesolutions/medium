@@ -53,7 +53,7 @@ class StreamController(base.BaseController):
 
         # uses the name of the operation to route the call properly
         # based on the prefix of the method
-        method = getattr(self, "handle_" + operation)
+        method = getattr(self, operation)
         method(request, parameters)
 
     def channel(self, request, parameters = {}):
