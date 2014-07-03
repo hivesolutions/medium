@@ -34,38 +34,18 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import colony.libs.import_util
+import colony
 
-mvc_utils = colony.libs.import_util.__import__("mvc_utils")
-controllers = colony.libs.import_util.__import__("controllers")
+import base
 
-class StreamController(controllers.Controller):
-    """
-    The medium (communication) stream controller.
-    """
+mvc_utils = colony.__import__("mvc_utils")
 
-    def handle_data(self, request, parameters = {}):
-        """
-        Handles the given data communication request.
+class StreamController(base.BaseController):
 
-        @type request: Request
-        @param request: The communication request to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
+    def data(self, request, parameters = {}):
         pass
 
-    def handle_changed(self, request, parameters = {}):
-        """
-        Handles the given (connection) changed communication request.
-
-        @type request: Request
-        @param request: The communication request to be handled.
-        @type parameters: Dictionary
-        @param parameters: The handler parameters.
-        """
-
+    def changed(self, request, parameters = {}):
         # retrieves the name of the operation to be processed
         # resulting from a change in the communication system
         operation = parameters.get("operation", None)
@@ -76,7 +56,7 @@ class StreamController(controllers.Controller):
         method = getattr(self, "handle_" + operation)
         method(request, parameters)
 
-    def handle_channel(self, request, parameters = {}):
+    def channel(self, request, parameters = {}):
         # retrieves the name of the channel for which the
         # authentication process must be executed
         channel = parameters.get("channel", None)

@@ -34,15 +34,13 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import colony.libs.import_util
+import colony
 
-mvc_utils = colony.libs.import_util.__import__("mvc_utils")
-controllers = colony.libs.import_util.__import__("controllers")
+import base
 
-class MainController(controllers.Controller):
-    """
-    The medium main controller.
-    """
+mvc_utils = colony.__import__("mvc_utils")
+
+class MainController(base.BaseController):
 
     fields_map = {}
     """ The map containing the filed values """
@@ -51,7 +49,7 @@ class MainController(controllers.Controller):
     """ The list containing the ticker messages """
 
     def __init__(self, plugin, system):
-        controllers.Controller.__init__(self, plugin, system)
+        base.BaseController.__init__(self, plugin, system)
         self.fields_map = {}
         self.ticker_messages_list = []
 

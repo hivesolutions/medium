@@ -34,14 +34,9 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import colony.libs.import_util
+import base
 
-controllers = colony.libs.import_util.__import__("controllers")
-
-class StreamHelperController(controllers.Controller):
-    """
-    The (communication) stream helper controller.
-    """
+class StreamHelperController(base.BaseController):
 
     def send_s(self, parameters, connection_name, message_id, message, channels = ()):
         # serializes the message using the message id and the message (contents)

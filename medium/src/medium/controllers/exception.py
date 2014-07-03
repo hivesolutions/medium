@@ -16,6 +16,9 @@
 # If you have any questions regarding the terms of this license please
 # refer to <http://www.hive.pt/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt> & Luís Martinho <lmartinho@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -31,6 +34,13 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import system
+import base
 
-from system import *
+class ExceptionController(base.BaseController):
+
+    def exception(self, request, message = None, traceback = None):
+        self._template(
+            request = request,
+            partial_page = "exception.html.tpl",
+            exception_message = message
+        )

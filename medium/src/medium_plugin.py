@@ -34,10 +34,9 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import colony.base.system
-import colony.base.decorators
+import colony
 
-class MediumPlugin(colony.base.system.Plugin):
+class MediumPlugin(colony.Plugin):
     """
     The main class for the Medium plugin.
     """
@@ -48,45 +47,31 @@ class MediumPlugin(colony.base.system.Plugin):
     version = "1.0.0"
     author = "Hive Solutions Lda. <development@hive.pt>"
     platforms = [
-        colony.base.system.CPYTHON_ENVIRONMENT
+        colony.CPYTHON_ENVIRONMENT
     ]
     capabilities = [
         "mvc_service"
     ]
     dependencies = [
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.mvc.utils"),
-        colony.base.system.PluginDependency("pt.hive.colony.plugins.misc.json")
+        colony.PluginDependency("pt.hive.colony.plugins.mvc.utils"),
+        colony.PluginDependency("pt.hive.colony.plugins.misc.json")
     ]
     main_modules = [
         "medium"
     ]
 
-    medium = None
-    """ The medium back end system reference to
-    be used from the front end calls """
-
-    mvc_utils_plugin = None
-    """ The mvc utils plugin """
-
-    json_plugin = None
-    """ The json plugin """
-
     def load_plugin(self):
-        colony.base.system.Plugin.load_plugin(self)
-        import medium.system
-        self.medium = medium.system.Medium(self)
+        colony.Plugin.load_plugin(self)
+        import medium
+        self.system = medium.Medium(self)
 
     def end_load_plugin(self):
-        colony.base.system.Plugin.end_load_plugin(self)
-        self.medium.load_components()
+        colony.Plugin.end_load_plugin(self)
+        self.system.load_components()
 
     def unload_plugin(self):
-        colony.base.system.Plugin.unload_plugin(self)
-        self.medium.unload_components()
-
-    @colony.base.decorators.inject_dependencies
-    def dependency_injected(self, plugin):
-        colony.base.system.Plugin.dependency_injected(self, plugin)
+        colony.Plugin.unload_plugin(self)
+        self.system.unload_components()
 
     def get_patterns(self):
         """
@@ -99,7 +84,7 @@ class MediumPlugin(colony.base.system.Plugin):
         to the web mvc service.
         """
 
-        return self.medium.get_patterns()
+        return self.system.get_patterns()
 
     def get_communication_patterns(self):
         """
@@ -113,7 +98,7 @@ class MediumPlugin(colony.base.system.Plugin):
         to the web mvc service.
         """
 
-        return self.medium.get_communication_patterns()
+        return self.system.get_communication_patterns()
 
     def get_resource_patterns(self):
         """
@@ -126,12 +111,4 @@ class MediumPlugin(colony.base.system.Plugin):
         to the web mvc service.
         """
 
-        return self.medium.get_resource_patterns()
-
-    @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.mvc.utils")
-    def set_mvc_utils_plugin(self, mvc_utils_plugin):
-        self.mvc_utils_plugin = mvc_utils_plugin
-
-    @colony.base.decorators.plugin_inject("pt.hive.colony.plugins.misc.json")
-    def set_json_plugin(self, json_plugin):
-        self.json_plugin = json_plugin
+        return self.system.get_resource_patterns()

@@ -51,6 +51,7 @@ class Medium(colony.base.system.System):
         mvc_utils_plugin = self.plugin.mvc_utils_plugin
 
         # creates the controllers and assigns them to the current instance
+        # allowing them to start being used in the current workflow
         mvc_utils_plugin.assign_controllers(self, self.plugin)
 
     def unload_components(self):
@@ -62,7 +63,8 @@ class Medium(colony.base.system.System):
         # retrieves the mvc utils plugin
         mvc_utils_plugin = self.plugin.mvc_utils_plugin
 
-        # destroys the controllers, unregistering them from the internal structures
+        # destroys the controllers, unregistering them from the internal
+        # structures, this should prevent any more usage of the controllers
         mvc_utils_plugin.unassign_controllers(self)
 
     def get_patterns(self):
@@ -77,13 +79,13 @@ class Medium(colony.base.system.System):
         """
 
         return (
-            (r"^medium/?$", self.main_controller.handle_index, "get"),
-            (r"^medium/field$", self.main_controller.handle_field_json, "get", "json"),
-            (r"^medium/message$", self.main_controller.handle_message_json, "get", "json"),
-            (r"^medium/video$", self.main_controller.handle_video_json, "get", "json"),
-            (r"^medium/ticker_message$", self.main_controller.handle_ticker_message_json, "get", "json"),
-            (r"^medium/ticker_clear$", self.main_controller.handle_ticker_clear_json, "get", "json"),
-            (r"^medium/register$", self.main_controller.handle_register_json, "get", "json")
+            (r"medium/?", self.main_controller.handle_index, "get"),
+            (r"medium/field", self.main_controller.handle_field_json, "get", "json"),
+            (r"medium/message", self.main_controller.handle_message_json, "get", "json"),
+            (r"medium/video", self.main_controller.handle_video_json, "get", "json"),
+            (r"medium/ticker_message", self.main_controller.handle_ticker_message_json, "get", "json"),
+            (r"medium/ticker_clear", self.main_controller.handle_ticker_clear_json, "get", "json"),
+            (r"medium/register", self.main_controller.handle_register_json, "get", "json")
         )
 
     def get_communication_patterns(self):
@@ -99,7 +101,7 @@ class Medium(colony.base.system.System):
         """
 
         return (
-            (r"^medium/communication$", (self.stream_controller, "medium/communication")),
+            (r"medium/communication", (self.stream_controller, "medium/communication")),
         )
 
     def get_resource_patterns(self):
@@ -113,12 +115,11 @@ class Medium(colony.base.system.System):
         to the web mvc service.
         """
 
-        # retrieves the plugin manager
+        # retrieves the plugin manager and uses it to retrieve
+        # the colony site plugin path
         plugin_manager = self.plugin.manager
-
-        # retrieves the medium plugin path
         plugin_path = plugin_manager.get_plugin_path_by_id(self.plugin.id)
 
         return (
-            (r"^medium/resources/.+$", (plugin_path + "/medium/resources/extras", "medium/resources")),
+            (r"medium/resources/.+", (plugin_path + "/medium/resources/extras", "medium/resources")),
         )

@@ -16,6 +16,9 @@
 # If you have any questions regarding the terms of this license please
 # refer to <http://www.hive.pt/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt> & Luís Martinho <lmartinho@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -31,6 +34,24 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import system
+import colony
 
-from system import *
+controllers = colony.__import__("controllers")
+
+class BaseController(controllers.Controller):
+
+    def __init__(self, plugin, system):
+        controllers.Controller.__init__(self, plugin, system)
+
+    def validate(self, request, parameters, validation_parameters):
+        return self.system.require_permissions(request, validation_parameters)
+
+    def template_file(self, template = "general.html.tpl", *args, **kwargs):
+        return self.retrieve_template_file(
+            file_path = template,
+            *args,
+            **kwargs
+        )
+
+    def _template(self, assign_session = True, *args, **kwargs):
+        return self.template(assign_session = assign_session, *args, **kwargs)
