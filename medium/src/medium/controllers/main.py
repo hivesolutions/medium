@@ -59,7 +59,7 @@ class MainController(base.BaseController):
     def index(self, request):
         self._template(
             request = request,
-            partial_page = "index_contents.html.tpl",
+            partial_page = "general/index.html.tpl",
             fields_map = self.fields_map,
             ticker_messages = self.ticker_messages_list
         )

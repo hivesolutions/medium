@@ -41,6 +41,6 @@ class ExceptionController(base.BaseController):
     def exception(self, request, message = None, traceback = None):
         self._template(
             request = request,
-            partial_page = "exception.html.tpl",
+            partial_page = "exception/exception.html.tpl",
             exception_message = message
         )
