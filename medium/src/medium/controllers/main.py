@@ -36,11 +36,11 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony
 
-import base
+from .base import BaseController
 
 mvc_utils = colony.__import__("mvc_utils")
 
-class MainController(base.BaseController):
+class MainController(BaseController):
 
     fields_map = {}
     """ The map containing the field values, these
@@ -51,7 +51,7 @@ class MainController(base.BaseController):
     strings contained in the list should be valid unicode """
 
     def __init__(self, plugin, system):
-        base.BaseController.__init__(self, plugin, system)
+        BaseController.__init__(self, plugin, system)
         self.fields_map = {}
         self.ticker_messages_list = []
 

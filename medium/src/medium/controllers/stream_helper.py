@@ -34,9 +34,9 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 """ The license for the module """
 
-import base
+from .base import BaseController
 
-class StreamHelperController(base.BaseController):
+class StreamHelperController(BaseController):
 
     def send_s(self, request, connection_name, message_id, message, channels = ()):
         # serializes the message using the message id and the message (contents)

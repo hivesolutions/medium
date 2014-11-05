@@ -36,11 +36,11 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony
 
-import base
+from .base import BaseController
 
 mvc_utils = colony.__import__("mvc_utils")
 
-class StreamController(base.BaseController):
+class StreamController(BaseController):
 
     def data(self, request, parameters = {}):
         pass
