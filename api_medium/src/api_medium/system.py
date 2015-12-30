@@ -322,7 +322,7 @@ class MediumClient(object):
         # returns the http client
         return self.http_client
 
-class MediumStructure:
+class MediumStructure(object):
     """
     The medium structure class.
     """
