@@ -21,84 +21,84 @@
 // __license__   = Hive Solutions Confidential Usage License (HSCUL)
 
 jQuery(document).ready(function() {
-            // retrieves the body element
-            var _body = jQuery("body");
+    // retrieves the body element
+    var _body = jQuery("body");
 
-            // retrieves the commits author week field
-            var fieldCommitsAuthorWeek = jQuery("#field-commits_author_week");
+    // retrieves the commits author week field
+    var fieldCommitsAuthorWeek = jQuery("#field-commits_author_week");
 
-            // starts the scheduler
-            _body.scheduler();
+    // starts the scheduler
+    _body.scheduler();
 
-            // starts the ticker
-            _body.ticker();
+    // starts the ticker
+    _body.ticker();
 
-            // starts the time
-            _body.time();
+    // starts the time
+    _body.time();
 
-            // starts the communication
-            _body.communication("default", {
-                        url : "communication",
-                        channels : ["public"],
-                        timeout : 500,
-                        callbacks : [messageProcessor]
-                    });
+    // starts the communication
+    _body.communication("default", {
+        url: "communication",
+        channels: ["public"],
+        timeout: 500,
+        callbacks: [messageProcessor]
+    });
 
-            // registers for the stream connected event
-            _body.bind("stream_connected", function() {
-                        // hides the error message
-                        _body.error("hide");
-                    });
+    // registers for the stream connected event
+    _body.bind("stream_connected", function() {
+        // hides the error message
+        _body.error("hide");
+    });
 
-            // registers for the stream disconnected event
-            _body.bind("stream_disconnected", function() {
-                        // shows the error message
-                        _body.error("show", {
-                                    "message" : "Disconnected from server"
-                                });
-                    });
-
-            // registers for the stream error event
-            _body.bind("stream_error", function() {
-                        // shows the error message
-                        _body.error("show", {
-                                    "message" : "Error communicating with server"
-                                });
-                    });
-
-            // registers for the set field event
-            _body.bind("set_field_commits_author_week",
-                    function(event, key, value) {
-                        // retrieves the commit chart element
-                        var commitChart = jQuery("#commit-chart");
-
-                        // draws the commit chart
-                        commitChart.weekchart({
-                                    value : value
-                                });
-                    });
-
-            // updates the field commits author chart in case the field
-            // is already set
-            fieldCommitsAuthorWeek.each(function(index, element) {
-                        // retrieves the element
-                        var element = jQuery(this);
-
-                        // retrieves the element contents
-                        var elementContents = element.html();
-
-                        // retrieves the commit chart element
-                        var commitChart = jQuery("#commit-chart");
-
-                        // draws the commit chart
-                        commitChart.weekchart({
-                                    value : elementContents
-                                });
-                    });
-
-            // starts the panel rotation for the body
-            _body.panelrotation();
+    // registers for the stream disconnected event
+    _body.bind("stream_disconnected", function() {
+        // shows the error message
+        _body.error("show", {
+            "message": "Disconnected from server"
         });
+    });
+
+    // registers for the stream error event
+    _body.bind("stream_error", function() {
+        // shows the error message
+        _body.error("show", {
+            "message": "Error communicating with server"
+        });
+    });
+
+    // registers for the set field event
+    _body.bind("set_field_commits_author_week",
+        function(event, key, value) {
+            // retrieves the commit chart element
+            var commitChart = jQuery("#commit-chart");
+
+            // draws the commit chart
+            commitChart.weekchart({
+                value: value
+            });
+        });
+
+    // updates the field commits author chart in case the field
+    // is already set
+    fieldCommitsAuthorWeek.each(function(index, element) {
+        // retrieves the element
+        var element = jQuery(this);
+
+        // retrieves the element contents
+        var elementContents = element.html();
+
+        // retrieves the commit chart element
+        var commitChart = jQuery("#commit-chart");
+
+        // draws the commit chart
+        commitChart.weekchart({
+            value: elementContents
+        });
+    });
+
+    // starts the panel rotation for the body
+    _body.panelrotation();
+});
 
 var messageProcessor = function(data) {
     // parses the data retrieving the json
@@ -110,7 +110,7 @@ var messageProcessor = function(data) {
 
     // switches over the message id
     switch (messageId) {
-        case "medium/field/set" :
+        case "medium/field/set":
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -126,7 +126,7 @@ var messageProcessor = function(data) {
             // breaks the switch
             break;
 
-        case "medium/message/new" :
+        case "medium/message/new":
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -145,7 +145,7 @@ var messageProcessor = function(data) {
             // breaks the switch
             break;
 
-        case "medium/video/new" :
+        case "medium/video/new":
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -158,7 +158,7 @@ var messageProcessor = function(data) {
             // breaks the switch
             break;
 
-        case "medium/ticker_message/new" :
+        case "medium/ticker_message/new":
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -177,7 +177,7 @@ var messageProcessor = function(data) {
             // breaks the switch
             break;
 
-        case "medium/ticker_message/clear" :
+        case "medium/ticker_message/clear":
             // parses the data (json) retrieving the status
             var status = jQuery.parseJSON(messageContents);
 
@@ -221,10 +221,10 @@ var showMessage = function(value, type, hide) {
 
     // converts the window to message window
     contentWrapperWindow.messagewindow("default", {
-                value : value,
-                type : type,
-                hide : hide
-            });
+        value: value,
+        type: type,
+        hide: hide
+    });
 
     // centers the video window
     contentWrapper.window("center");
@@ -246,8 +246,8 @@ var showVideo = function(videoId) {
     // converts the window to video window
     contentWrapperWindow.videowindow();
     contentWrapperWindow.videowindow("setVideo", {
-                videoId : videoId
-            });
+        videoId: videoId
+    });
 
     // centers the video window
     contentWrapper.window("center");
@@ -268,10 +268,10 @@ var addTickerMessage = function(value, type, subValue) {
 
     // adds the message to the ticker
     ticker.ticker("add", {
-                value : value,
-                type : type,
-                subValue : subValue
-            });
+        value: value,
+        type: type,
+        subValue: subValue
+    });
 
     // in case the main panel was not visible hides it
     !mainPanelVisible && mainPanel.hide();
@@ -294,7 +294,7 @@ var onYouTubePlayerReady = function(playerId) {
 
     // adds the on state change event listener
     videoContentsReference.addEventListener("onStateChange",
-            "onYouTubeStateChange");
+        "onYouTubeStateChange");
 }
 
 var onYouTubeStateChange = function(newState) {

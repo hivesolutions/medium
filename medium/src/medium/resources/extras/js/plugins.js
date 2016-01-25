@@ -27,7 +27,7 @@
 
         // the default values for the panel rotation
         var defaults = {
-            timeout : DEFAULT_TIMEOUT
+            timeout: DEFAULT_TIMEOUT
         };
 
         // sets the default method value
@@ -64,23 +64,23 @@
             // iterates over all the panels to create
             // the initial element ids (list)
             panels.each(function(index, element) {
-                        // retrieves the element
-                        var element = jQuery(this);
+                // retrieves the element
+                var element = jQuery(this);
 
-                        // retrieves the element id
-                        var elementId = element.attr("id");
+                // retrieves the element id
+                var elementId = element.attr("id");
 
-                        // in case the current element
-                        // is the main panel
-                        if (elementId == "main-panel") {
-                            // continues the loop
-                            return;
-                        }
+                // in case the current element
+                // is the main panel
+                if (elementId == "main-panel") {
+                    // continues the loop
+                    return;
+                }
 
-                        // adds the element id to the list
-                        // of element ids
-                        elementIds.push(elementId);
-                    });
+                // adds the element id to the list
+                // of element ids
+                elementIds.push(elementId);
+            });
 
             // sets the initial show main value
             matchedObject.data("showMain", true);
@@ -132,7 +132,7 @@
 
                 // retrieves the current element
                 var currentElement = jQuery("#" + currentElementId,
-                        matchedObject);
+                    matchedObject);
 
                 // increments the current index
                 currentIndex++;
@@ -154,13 +154,13 @@
 
             // sets the timeout for the update
             setTimeout(function() {
-                        _update(matchedObject, options)
-                    }, timeout);
+                _update(matchedObject, options)
+            }, timeout);
         };
 
         // switches over the method
         switch (method) {
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
 
@@ -228,8 +228,8 @@
 
             // sets the timeout for the next update
             setTimeout(function() {
-                        _update(matchedObject, options);
-                    }, SCHEDULER_RATE_TIMEOUT);
+                _update(matchedObject, options);
+            }, SCHEDULER_RATE_TIMEOUT);
         };
 
         var _add = function(matchedObject, options) {
@@ -258,8 +258,7 @@
 
             // in case the current element target timestamp
             // is valid (is time to execute it)
-            if (currentElement
-                    && currentElement.targetTimestamp <= currentTimestamp) {
+            if (currentElement && currentElement.targetTimestamp <= currentTimestamp) {
                 // calls the method associated with
                 // the current element
                 currentElement.method(currentElement);
@@ -271,11 +270,11 @@
 
         // switches over the method
         switch (method) {
-            case "add" :
+            case "add":
                 _add(matchedObject, options);
                 break;
 
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -293,7 +292,8 @@
 
         // the list of abreviated names for the months
         var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"];
+            "Sep", "Oct", "Nov", "Dec"
+        ];
 
         // the default values for the menu
         var defaults = {};
@@ -322,8 +322,7 @@
         /**
          * Creates the necessary html for the component.
          */
-        var _appendHtml = function() {
-        };
+        var _appendHtml = function() {};
 
         /**
          * Registers the event handlers for the created objects.
@@ -339,8 +338,8 @@
 
             // sets the timeout for the next time update
             setTimeout(function() {
-                        _updateTime(matchedObject, options);
-                    }, UPDATE_TIMEOUT);
+                _updateTime(matchedObject, options);
+            }, UPDATE_TIMEOUT);
         };
 
         var __updateTime = function(matchedObject, options) {
@@ -412,7 +411,7 @@
 
         // switches over the method
         switch (method) {
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -464,9 +463,9 @@
          */
         var _registerHandlers = function() {
             jQuery(window).resize(function(event) {
-                        // centers the window
-                        _centerWindow(matchedObject, options);
-                    });
+                // centers the window
+                _centerWindow(matchedObject, options);
+            });
         };
 
         var _centerWindow = function(matchedObject, options) {
@@ -506,15 +505,15 @@
 
         // switches over the method
         switch (method) {
-            case "center" :
+            case "center":
                 _centerWindow(matchedObject, options);
                 break;
 
-            case "remove" :
+            case "remove":
                 _removeWindow(matchedObject, options);
                 break;
 
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -580,30 +579,28 @@
 
             // switches over the type
             switch (type) {
-                case "error" :
+                case "error":
                     var audioSource = "resources/audio/error.ogg";
                     var iconClass = "icon-error";
                     var extraClass = "orange-background";
                     break;
 
-                case "warning" :
+                case "warning":
                     var audioSource = "resources/audio/warning.ogg";
                     var iconClass = "icon-warning";
                     var extraClass = "yellow-background";
                     break;
 
-                case "information" :
+                case "information":
                     var audioSource = "resources/audio/information.ogg";
                     var iconClass = "icon-information";
                     var extraClass = "blue-background";
                     break;
             }
 
-            matchedObject.append("<div class=\"message-box-contents\">"
-                    + "<div class=\"icon text-header " + iconClass + "\">"
-                    + type + "</div>" + "<p class=\"text text-message\">"
-                    + value + "</p>" + "<audio src=\"" + audioSource
-                    + "\" autoplay=\"autoplay\">" + "</div>");
+            matchedObject.append("<div class=\"message-box-contents\">" + "<div class=\"icon text-header " +
+                iconClass + "\">" + type + "</div>" + "<p class=\"text text-message\">" + value +
+                "</p>" + "<audio src=\"" + audioSource + "\" autoplay=\"autoplay\">" + "</div>");
 
             matchedObject.addClass("message-box");
             matchedObject.addClass(extraClass);
@@ -620,22 +617,22 @@
             // sets the timeout for the hide and remove
             // of the window
             hide && setTimeout(function() {
-                        // hides and removes the window
-                        __hideRemoveWindow(matchedObject, options);
-                    }, hide);
+                // hides and removes the window
+                __hideRemoveWindow(matchedObject, options);
+            }, hide);
         };
 
         var __hideRemoveWindow = function(matchedObject, options) {
             // hides the current window
             matchedObject.fadeOut(500, function() {
-                        // removes the window
-                        matchedObject.remove();
-                    });
+                // removes the window
+                matchedObject.remove();
+            });
         };
 
         // switches over the method
         switch (method) {
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -683,8 +680,7 @@
         /**
          * Registers the event handlers for the created objects.
          */
-        var _registerHandlers = function() {
-        };
+        var _registerHandlers = function() {};
 
         var _setVideo = function(matchedObject, options) {
             // retrieves the video id
@@ -692,34 +688,33 @@
 
             // creates the parameters map
             var parameters = {
-                allowScriptAccess : "always",
-                allowfullscreen : "true",
-                width : "100%",
-                height : "100%"
+                allowScriptAccess: "always",
+                allowfullscreen: "true",
+                width: "100%",
+                height: "100%"
             };
 
             // creates the attributes map
             var attributes = {
-                id : "video-contents"
+                id: "video-contents"
             };
 
             // creates the complete video url
-            var url = "http://www.youtube.com/v/"
-                    + videoId
-                    + "?fs=1&rel=0&enablejsapi=1&version=3&amp;hl=en_US&amp;hd=1;autoplay=1";
+            var url = "http://www.youtube.com/v/" + videoId +
+                "?fs=1&rel=0&enablejsapi=1&version=3&amp;hl=en_US&amp;hd=1;autoplay=1";
 
             // embeddeds the swf for the video
             swfobject.embedSWF(url, "video-box-contents", "100%", "100%", "8",
-                    null, null, parameters, attributes);
+                null, null, parameters, attributes);
         };
 
         // switches over the method
         switch (method) {
-            case "setVideo" :
+            case "setVideo":
                 _setVideo(matchedObject, options);
                 break;
 
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -780,8 +775,7 @@
         /**
          * Registers the event handlers for the created objects.
          */
-        var _registerHandlers = function() {
-        };
+        var _registerHandlers = function() {};
 
         var _resize = function(matchedObject, options) {
             // retrieves the ticker wrapper element
@@ -903,17 +897,17 @@
 
             // switches over the type
             switch (type) {
-                case "error" :
+                case "error":
                     var iconClass = "icon-ticker-error";
                     var subValueClass = "orange";
                     break;
 
-                case "warning" :
+                case "warning":
                     var iconClass = "icon-ticker-warning";
                     var subValueClass = "yellow";
                     break;
 
-                case "information" :
+                case "information":
                     var iconClass = "icon-ticker-information";
                     var subValueClass = "blue";
                     break;
@@ -927,17 +921,16 @@
 
             // retrieves the ticker wrapper clear element
             var tickerWrapperClearElement = jQuery(".clear",
-                    tickerWrapperElement);
+                tickerWrapperElement);
 
             // adds the ticker before the clear element
-            tickerWrapperClearElement.before("<div class=\"icon-ticker "
-                    + iconClass + "\">" + "<span class=\"text\">" + value
-                    + "</span> " + "<span class=\"sub-header-ticker "
-                    + subValueClass + "\">" + subValue + "</span>" + "</div>");
+            tickerWrapperClearElement.before("<div class=\"icon-ticker " + iconClass + "\">" +
+                "<span class=\"text\">" + value + "</span> " + "<span class=\"sub-header-ticker " +
+                subValueClass + "\">" + subValue + "</span>" + "</div>");
 
             // retrieves the icon ticker element
             var iconTicketElement = jQuery(
-                    "#ticker-wrapper > .icon-ticker:last", matchedObject);
+                "#ticker-wrapper > .icon-ticker:last", matchedObject);
 
             // retrieves the ticker width
             var tickerWidth = tickerReference.offsetWidth;
@@ -951,7 +944,7 @@
             // sets the reset position flag, in case the
             // ticker wrapper element was empty (before)
             tickerWrapperElementEmpty
-                    && matchedObject.data("resetPosition", true);
+                && matchedObject.data("resetPosition", true);
 
             // sets the total width in the matched object
             matchedObject.data("totalWidth", totalWidth);
@@ -960,7 +953,7 @@
         var _clear = function(matchedObject, options) {
             // retrieves the ticker wrapper icon tickers
             var tickerWrapperIconTickers = jQuery(
-                    "#ticker-wrapper > .icon-ticker", matchedObject);
+                "#ticker-wrapper > .icon-ticker", matchedObject);
 
             // removes the icon tickers
             tickerWrapperIconTickers.remove();
@@ -980,15 +973,15 @@
             item.targetTimestamp = currentTimestamp + FRAME_RATE_TIMEOUT
             item.method = _updatePosition;
             item.arguments = {
-                matchedObject : matchedObject,
-                options : options,
-                targetScroll : targetScroll
+                matchedObject: matchedObject,
+                options: options,
+                targetScroll: targetScroll
             };
 
             // adds the item to the scheduler
             jQuery("body").scheduler("add", {
-                        item : item
-                    });
+                item: item
+            });
         };
 
         var __calculateTotalWidth = function(matchedObject, options) {
@@ -1012,8 +1005,8 @@
 
                 // increments the total width with the element offset width
                 // and the current element margins
-                totalWidth += elementOffsetWidth + currentElementMarginLeft
-                        + currentElementMarginRight;
+                totalWidth += elementOffsetWidth + currentElementMarginLeft +
+                    currentElementMarginRight;
             });
 
             // returns the total width
@@ -1022,15 +1015,15 @@
 
         // switches over the method
         switch (method) {
-            case "add" :
+            case "add":
                 _add(matchedObject, options);
                 break;
 
-            case "clear" :
+            case "clear":
                 _clear(matchedObject, options);
                 break;
 
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
                 break;
@@ -1062,8 +1055,7 @@
          * Initializer of the plugin, runs the necessary functions to initialize
          * the structures.
          */
-        var initialize = function() {
-        };
+        var initialize = function() {};
 
         /**
          * Creates the necessary html for the component.
@@ -1075,8 +1067,7 @@
         /**
          * Registers the event handlers for the created objects.
          */
-        var _registerHandlers = function() {
-        };
+        var _registerHandlers = function() {};
 
         var _show = function(matchedObject, options) {
             // retrieves the message
@@ -1105,21 +1096,21 @@
 
         // switches over the method
         switch (method) {
-            case "show" :
+            case "show":
                 // shows the error
                 _show(matchedObject, options);
 
                 // breaks the switch
                 break;
 
-            case "hide" :
+            case "hide":
                 // hides the error
                 _hide(matchedObject, options);
 
                 // breaks the switch
                 break;
 
-            case "default" :
+            case "default":
                 // initializes the plugin
                 initialize();
 
@@ -1136,7 +1127,8 @@
     jQuery.fn.weekchart = function(options) {
         // the list of abreviated names for the months
         var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"];
+            "Sep", "Oct", "Nov", "Dec"
+        ];
 
         // the default value to be used
         var DEFAULT_VALUE = {};
@@ -1147,8 +1139,8 @@
 
         // the default values for the menu
         var defaults = {
-            value : DEFAULT_VALUE,
-            timeout : DEFAULT_TIMEOUT
+            value: DEFAULT_VALUE,
+            timeout: DEFAULT_TIMEOUT
         };
 
         // sets the default options value
@@ -1252,16 +1244,15 @@
             // sets the timeout to draw the chart
             // avoids problems while loading remote fonts
             setTimeout(function() {
-                        // draws the chart
-                        matchedObject.chart("draw", _options);
-                    }, timeout);
+                // draws the chart
+                matchedObject.chart("draw", _options);
+            }, timeout);
         };
 
         /**
          * Registers the event handlers for the created objects.
          */
-        var _registerHandlers = function() {
-        };
+        var _registerHandlers = function() {};
 
         // initializes the plugin
         initialize();
