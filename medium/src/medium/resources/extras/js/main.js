@@ -302,7 +302,7 @@ var onYouTubeStateChange = function(newState) {
     var contentWrapper = jQuery("#content-wrapper");
 
     // in case the video has ended
-    if (newState == 0) {
+    if (newState === 0) {
         // removes the current video window
         contentWrapper.window("remove");
     }
