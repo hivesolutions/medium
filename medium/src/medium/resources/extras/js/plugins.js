@@ -72,7 +72,7 @@
 
                 // in case the current element
                 // is the main panel
-                if (elementId == "main-panel") {
+                if (elementId === "main-panel") {
                     // continues the loop
                     return;
                 }
@@ -114,7 +114,7 @@
             var elementIds = matchedObject.data("elementIds");
 
             // in case the show main is set
-            if (showMain == true) {
+            if (showMain === true) {
                 // retrieves the current element as the main panel
                 var currentElement = jQuery("#main-panel", matchedObject);
 
@@ -122,7 +122,7 @@
                 matchedObject.data("showMain", false);
             } else {
                 // in case the current index "overflows"
-                if (currentIndex == elementIds.length) {
+                if (currentIndex === elementIds.length) {
                     // resets the current index
                     currentIndex = 0;
                 }
@@ -572,7 +572,7 @@
 
             // in case the match is not valid and the secure
             // flag is enabled
-            if (secure && (valueMatch == null || valueMatch[0] != value)) {
+            if (secure && (valueMatch === null || valueMatch === undefined || valueMatch[0] !== value)) {
                 // sets the value to invalid message
                 value = "invalid message sent";
             }
@@ -917,7 +917,7 @@
             var tickerWrapperIconTickers = tickerWrapperElement.children(".icon-ticker");
 
             // retrieves if the ticker wrapper is empty
-            var tickerWrapperElementEmpty = tickerWrapperIconTickers.length == 0;
+            var tickerWrapperElementEmpty = tickerWrapperIconTickers.length === 0;
 
             // retrieves the ticker wrapper clear element
             var tickerWrapperClearElement = jQuery(".clear",
