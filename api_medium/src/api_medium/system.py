@@ -48,12 +48,12 @@ class ApiMedium(colony.System):
         In case the open client flag is set the client is
         immediately opened.
 
-        @type api_attributes: Dictionary
-        @param api_attributes: The api attributes to be used.
-        @type open_client: bool
-        @param open_client: If the client should be opened.
-        @rtype: MediumClient
-        @return: The created client.
+        :type api_attributes: Dictionary
+        :param api_attributes: The api attributes to be used.
+        :type open_client: bool
+        :param open_client: If the client should be opened.
+        :rtype: MediumClient
+        :return: The created client.
         """
 
         # retrieves the client http plugin
@@ -94,12 +94,12 @@ class MediumClient(object):
         """
         Constructor of the class.
 
-        @type json_plugin: JsonPlugin
-        @param json_plugin: The json plugin.
-        @type client_http_plugin: ClientHttpPlugin
-        @param client_http_plugin: The client http plugin.
-        @type medium_structure: MediumStructure
-        @param medium_structure: The medium structure.
+        :type json_plugin: JsonPlugin
+        :param json_plugin: The json plugin.
+        :type client_http_plugin: ClientHttpPlugin
+        :param client_http_plugin: The client http plugin.
+        :type medium_structure: MediumStructure
+        :param medium_structure: The medium structure.
         """
 
         self.json_plugin = json_plugin
@@ -126,8 +126,8 @@ class MediumClient(object):
         """
         Generates a new medium structure, for the given parameters.
 
-        @type base_url: String
-        @param base_url: The base url of the medium provider.
+        :type base_url: String
+        :param base_url: The base url of the medium provider.
         """
 
         # constructs a new medium structure
@@ -144,12 +144,12 @@ class MediumClient(object):
         """
         Sets the field for the given key and value.
 
-        @type key: String
-        @param key: The key to the field to be set.
-        @type value: String
-        @param value: The value of the field to be set.
-        @rtype: Dictionary
-        @return: The field information for the given field parameters.
+        :type key: String
+        :param key: The key to the field to be set.
+        :type value: String
+        :param value: The value of the field to be set.
+        :rtype: Dictionary
+        :return: The field information for the given field parameters.
         """
 
         # retrieves the base url from the medium structure and then
@@ -178,12 +178,12 @@ class MediumClient(object):
         The given value is going to be serialized into
         json and then provided to the service.
 
-        @type key: String
-        @param key: The key to the field to be set.
-        @type value: String
-        @param value: The value of the field to be set.
-        @rtype: Dictionary
-        @return: The field information for the given field parameters.
+        :type key: String
+        :param key: The key to the field to be set.
+        :type value: String
+        :param value: The value of the field to be set.
+        :rtype: Dictionary
+        :return: The field information for the given field parameters.
         """
 
         # loads json retrieving the data
@@ -199,12 +199,12 @@ class MediumClient(object):
         """
         Sets the message for the given value and type.
 
-        @type value: String
-        @param value: The value of the message to be set.
-        @type type: String
-        @param type: The type of the message to be set.
-        @rtype: Dictionary
-        @return: The message information for the given message parameters.
+        :type value: String
+        :param value: The value of the message to be set.
+        :type type: String
+        :param type: The type of the message to be set.
+        :rtype: Dictionary
+        :return: The message information for the given message parameters.
         """
 
         # retrieves the base url from the medium structure and then
@@ -231,8 +231,8 @@ class MediumClient(object):
         """
         Retrieves the medium structure.
 
-        @rtype: MediumStructure
-        @return: The medium structure.
+        :rtype: MediumStructure
+        :return: The medium structure.
         """
 
         return self.medium_structure
@@ -241,8 +241,8 @@ class MediumClient(object):
         """
         Sets the medium structure.
 
-        @type medium_structure: MediumStructure
-        @param medium_structure: The medium structure.
+        :type medium_structure: MediumStructure
+        :param medium_structure: The medium structure.
         """
 
         self.medium_structure = medium_structure
@@ -251,12 +251,12 @@ class MediumClient(object):
         """
         Builds the url for the given url and parameters.
 
-        @type base_url: String
-        @param base_url: The base url to be used.
-        @type parameters: Dictionary
-        @param parameters: The parameters to be used for url construction.
-        @rtype: String
-        @return: The built url for the given parameters.
+        :type base_url: String
+        :param base_url: The base url to be used.
+        :type parameters: Dictionary
+        :param parameters: The parameters to be used for url construction.
+        :rtype: String
+        :return: The built url for the given parameters.
         """
 
         # retrieves the http client
@@ -272,14 +272,14 @@ class MediumClient(object):
         """
         Fetches the given url for the given parameters and using the given method.
 
-        @type url: String
-        @param url: The url to be fetched.
-        @type parameters: Dictionary
-        @param parameters: The parameters to be used the fetch.
-        @type method: String
-        @param method: The method to be used in the fetch.
-        @rtype: String
-        @return: The fetched data.
+        :type url: String
+        :param url: The url to be fetched.
+        :type parameters: Dictionary
+        :param parameters: The parameters to be used the fetch.
+        :type method: String
+        :param method: The method to be used in the fetch.
+        :rtype: String
+        :return: The fetched data.
         """
 
         # in case parameters is not defined must create a new
@@ -302,8 +302,8 @@ class MediumClient(object):
         Retrieves the http client currently in use (in case it's created)
         if not created creates the http client.
 
-        @rtype: HttpClient
-        @return: The retrieved http client.
+        :rtype: HttpClient
+        :return: The retrieved http client.
         """
 
         # in case no http client exists
@@ -334,8 +334,8 @@ class MediumStructure(object):
         """
         Constructor of the class.
 
-        @type base_url: String
-        @param base_url: The base url of the medium provider.
+        :type base_url: String
+        :param base_url: The base url of the medium provider.
         """
 
         self.base_url = base_url
@@ -344,8 +344,8 @@ class MediumStructure(object):
         """
         Retrieves the base url.
 
-        @rtype: String
-        @return: The base url.
+        :rtype: String
+        :return: The base url.
         """
 
         return self.base_url
@@ -354,8 +354,8 @@ class MediumStructure(object):
         """
         Sets the base url.
 
-        @type base_url: String
-        @param base_url: The base url.
+        :type base_url: String
+        :param base_url: The base url.
         """
 
         self.base_url = base_url

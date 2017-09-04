@@ -79,8 +79,8 @@ class MediumPlugin(colony.Plugin):
         to the web mvc service. The tuple should relate the route with the handler
         method/function.
 
-        @rtype: Tuple
-        @return: The tuple of regular expressions to be used as patterns,
+        :rtype: Tuple
+        :return: The tuple of regular expressions to be used as patterns,
         to the web mvc service.
         """
 
@@ -93,8 +93,8 @@ class MediumPlugin(colony.Plugin):
         containing the data handler, the connection changed handler and the name
         of the connection.
 
-        @rtype: Tuple
-        @return: The tuple of regular expressions to be used as communication patterns,
+        :rtype: Tuple
+        :return: The tuple of regular expressions to be used as communication patterns,
         to the web mvc service.
         """
 
@@ -106,8 +106,8 @@ class MediumPlugin(colony.Plugin):
         to the web mvc service. The tuple should relate the route with the base
         file system path to be used.
 
-        @rtype: Tuple
-        @return: The tuple of regular expressions to be used as resource patterns,
+        :rtype: Tuple
+        :return: The tuple of regular expressions to be used as resource patterns,
         to the web mvc service.
         """
 
