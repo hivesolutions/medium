@@ -127,7 +127,7 @@ class MediumClient(object):
         Generates a new medium structure, for the given parameters.
 
         :type base_url: String
-        :param base_url: The base url of the medium provider.
+        :param base_url: The base URL of the medium provider.
         """
 
         # constructs a new medium structure
@@ -252,7 +252,7 @@ class MediumClient(object):
         Builds the url for the given url and parameters.
 
         :type base_url: String
-        :param base_url: The base url to be used.
+        :param base_url: The base URL to be used.
         :type parameters: Dictionary
         :param parameters: The parameters to be used for url construction.
         :rtype: String
@@ -328,14 +328,14 @@ class MediumStructure(object):
     """
 
     base_url = None
-    """ The base url of the medium provider """
+    """ The base URL of the medium provider """
 
     def __init__(self, base_url):
         """
         Constructor of the class.
 
         :type base_url: String
-        :param base_url: The base url of the medium provider.
+        :param base_url: The base URL of the medium provider.
         """
 
         self.base_url = base_url
@@ -345,7 +345,7 @@ class MediumStructure(object):
         Retrieves the base url.
 
         :rtype: String
-        :return: The base url.
+        :return: The base URL.
         """
 
         return self.base_url
@@ -355,7 +355,7 @@ class MediumStructure(object):
         Sets the base url.
 
         :type base_url: String
-        :param base_url: The base url.
+        :param base_url: The base URL.
         """
 
         self.base_url = base_url
