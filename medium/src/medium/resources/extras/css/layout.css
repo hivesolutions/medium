@@ -304,9 +304,17 @@ body {
 
 .message-box {
     border-radius: 20px 20px 20px 20px;
+    -o-border-radius: 20px 20px 20px 20px;
+    -ms-border-radius: 20px 20px 20px 20px;
     -moz-border-radius: 20px 20px 20px 20px;
+    -khtml-border-radius: 20px 20px 20px 20px;
     -webkit-border-radius: 20px 20px 20px 20px;
     opacity: 0.95;
+    -o-opacity: 0.95;
+    -ms-opacity: 0.95;
+    -moz-opacity: 0.95;
+    -khtml-opacity: 0.95;
+    -webkit-opacity: 0.95;
     width: 840px;
 }
 
@@ -316,7 +324,10 @@ body {
 
 .video-box {
     border-radius: 20px 20px 20px 20px;
+    -o-border-radius: 20px 20px 20px 20px;
+    -ms-border-radius: 20px 20px 20px 20px;
     -moz-border-radius: 20px 20px 20px 20px;
+    -khtml-border-radius: 20px 20px 20px 20px;
     -webkit-border-radius: 20px 20px 20px 20px;
     height: 745px;
     width: 1280px;
@@ -337,6 +348,11 @@ body {
     height: 1080px;
     left: 0px;
     opacity: 0.75;
+    -o-opacity: 0.75;
+    -ms-opacity: 0.75;
+    -moz-opacity: 0.75;
+    -khtml-opacity: 0.75;
+    -webkit-opacity: 0.75;
     position: absolute;
     top: 0px;
     width: 1920px;
