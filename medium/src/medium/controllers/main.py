@@ -152,8 +152,8 @@ class MainController(BaseController):
         connection.add_print_handler()
         connection.add_apn_handler(
             "12007EF74A0E8518EAB44CA4922B49FD4002462AFB37D7D9890A7E02D81FD24B",
-            key_file = "c:/apn_key.pem",
-            cert_file = "c:/apn_cert.pem"
+            key_file = "apn_key.pem",
+            cert_file = "apn_cert.pem"
         )
 
         # retrieves the identifier of the connection that
