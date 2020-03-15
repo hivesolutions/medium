@@ -56,7 +56,7 @@ class ApiMedium(colony.System):
         :return: The created client.
         """
 
-        # retrieves the client http plugin
+        # retrieves the client HTTP plugin
         client_http_plugin = self.plugin.client_http_plugin
 
         # retrieves the json plugin
@@ -82,13 +82,13 @@ class MediumClient(object):
     """ The json plugin """
 
     client_http_plugin = None
-    """ The client http plugin """
+    """ The client HTTP plugin """
 
     medium_structure = None
     """ The medium structure """
 
     http_client = None
-    """ The http client for the connection """
+    """ The HTTP client for the connection """
 
     def __init__(self, json_plugin = None, client_http_plugin = None, medium_structure = None):
         """
@@ -96,8 +96,8 @@ class MediumClient(object):
 
         :type json_plugin: JSONPlugin
         :param json_plugin: The json plugin.
-        :type client_http_plugin: ClientHttpPlugin
-        :param client_http_plugin: The client http plugin.
+        :type client_http_plugin: ClientHTTPPlugin
+        :param client_http_plugin: The client HTTP plugin.
         :type medium_structure: MediumStructure
         :param medium_structure: The medium structure.
         """
@@ -118,7 +118,7 @@ class MediumClient(object):
         Closes the medium client.
         """
 
-        # in case an http client is defined must close
+        # in case an HTTP client is defined must close
         # it in accordance with the specification
         if self.http_client: self.http_client.close({})
 
@@ -259,7 +259,7 @@ class MediumClient(object):
         :return: The built url for the given parameters.
         """
 
-        # retrieves the http client
+        # retrieves the HTTP client
         http_client = self._get_http_client()
 
         # build the url from the base url
@@ -286,10 +286,10 @@ class MediumClient(object):
         # parameters map to be used
         if not parameters: parameters = {}
 
-        # retrieves the http client
+        # retrieves the HTTP client
         http_client = self._get_http_client()
 
-        # fetches the url retrieving the http response and then
+        # fetches the url retrieving the HTTP response and then
         # retrieves the received message as the contents response
         http_response = http_client.fetch_url(url, method, parameters, content_type_charset = "utf-8")
         contents = http_response.received_message
@@ -299,27 +299,27 @@ class MediumClient(object):
 
     def _get_http_client(self):
         """
-        Retrieves the http client currently in use (in case it's created)
-        if not created creates the http client.
+        Retrieves the HTTP client currently in use (in case it's created)
+        if not created creates the HTTP client.
 
-        :rtype: HttpClient
-        :return: The retrieved http client.
+        :rtype: HTTPClient
+        :return: The retrieved HTTP client.
         """
 
-        # in case no http client exists
+        # in case no HTTP client exists
         if not self.http_client:
-            # creates the http client parameters
+            # creates the HTTP client parameters
             http_client_parameters = {
                 "content_type_charset" : "utf-8"
             }
 
-            # creates the http client
+            # creates the HTTP client
             self.http_client = self.client_http_plugin.create_client(http_client_parameters)
 
-            # opens the http client
+            # opens the HTTP client
             self.http_client.open({})
 
-        # returns the http client
+        # returns the HTTP client
         return self.http_client
 
 class MediumStructure(object):
