@@ -33,4 +33,4 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 from . import system
 
-from .system import ApiMedium
+from .system import APIMedium

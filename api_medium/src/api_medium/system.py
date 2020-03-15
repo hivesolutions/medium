@@ -36,20 +36,20 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony
 
-class ApiMedium(colony.System):
+class APIMedium(colony.System):
     """
-    The api medium class.
+    The API Medium class.
     """
 
     def create_client(self, api_attributes, open_client = True):
         """
-        Creates a client, with the given api attributes.
+        Creates a client, with the given API attributes.
 
         In case the open client flag is set the client is
         immediately opened.
 
         :type api_attributes: Dictionary
-        :param api_attributes: The api attributes to be used.
+        :param api_attributes: The API attributes to be used.
         :type open_client: bool
         :param open_client: If the client should be opened.
         :rtype: MediumClient
@@ -62,20 +62,20 @@ class ApiMedium(colony.System):
         # retrieves the json plugin
         json_plugin = self.plugin.json_plugin
 
-        # retrieves the medium structure (if available)
+        # retrieves the Medium structure (if available)
         medium_structure = api_attributes.get("medium_structure", None)
 
-        # creates a new medium client with the given options and in
+        # creates a new Medium client with the given options and in
         # case the is meant to be open open the client
         medium_client = MediumClient(json_plugin, client_http_plugin, medium_structure)
         open_client and medium_client.open()
 
-        # returns the medium client
+        # returns the Medium client
         return medium_client
 
 class MediumClient(object):
     """
-    The class that represents a medium client connection.
+    The class that represents a Medium client connection.
     """
 
     json_plugin = None
@@ -85,7 +85,7 @@ class MediumClient(object):
     """ The client HTTP plugin """
 
     medium_structure = None
-    """ The medium structure """
+    """ The Medium structure """
 
     http_client = None
     """ The HTTP client for the connection """
@@ -99,7 +99,7 @@ class MediumClient(object):
         :type client_http_plugin: ClientHTTPPlugin
         :param client_http_plugin: The client HTTP plugin.
         :type medium_structure: MediumStructure
-        :param medium_structure: The medium structure.
+        :param medium_structure: The Medium structure.
         """
 
         self.json_plugin = json_plugin
@@ -108,14 +108,14 @@ class MediumClient(object):
 
     def open(self):
         """
-        Opens the medium client.
+        Opens the Medium client.
         """
 
         pass
 
     def close(self):
         """
-        Closes the medium client.
+        Closes the Medium client.
         """
 
         # in case an HTTP client is defined must close
@@ -124,20 +124,20 @@ class MediumClient(object):
 
     def generate_medium_structure(self, base_url, set_structure = True):
         """
-        Generates a new medium structure, for the given parameters.
+        Generates a new Medium structure, for the given parameters.
 
         :type base_url: String
-        :param base_url: The base URL of the medium provider.
+        :param base_url: The base URL of the Medium provider.
         """
 
-        # constructs a new medium structure
+        # constructs a new Medium structure
         medium_structure = MediumStructure(base_url)
 
         # in case the structure is meant to be set
-        # sets the medium structure
+        # sets the Medium structure
         if set_structure: self.set_medium_structure(medium_structure)
 
-        # returns the medium structure
+        # returns the Medium structure
         return medium_structure
 
     def set_field(self, key, value):
@@ -152,7 +152,7 @@ class MediumClient(object):
         :return: The field information for the given field parameters.
         """
 
-        # retrieves the base url from the medium structure and then
+        # retrieves the base url from the Medium structure and then
         # uses it to construct the retrieval url by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
@@ -207,7 +207,7 @@ class MediumClient(object):
         :return: The message information for the given message parameters.
         """
 
-        # retrieves the base url from the medium structure and then
+        # retrieves the base url from the Medium structure and then
         # uses it to construct the retrieval url by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
@@ -229,20 +229,20 @@ class MediumClient(object):
 
     def get_medium_structure(self):
         """
-        Retrieves the medium structure.
+        Retrieves the Medium structure.
 
         :rtype: MediumStructure
-        :return: The medium structure.
+        :return: The Medium structure.
         """
 
         return self.medium_structure
 
     def set_medium_structure(self, medium_structure):
         """
-        Sets the medium structure.
+        Sets the Medium structure.
 
         :type medium_structure: MediumStructure
-        :param medium_structure: The medium structure.
+        :param medium_structure: The Medium structure.
         """
 
         self.medium_structure = medium_structure
@@ -324,18 +324,18 @@ class MediumClient(object):
 
 class MediumStructure(object):
     """
-    The medium structure class.
+    The Medium structure class.
     """
 
     base_url = None
-    """ The base URL of the medium provider """
+    """ The base URL of the Medium provider """
 
     def __init__(self, base_url):
         """
         Constructor of the class.
 
         :type base_url: String
-        :param base_url: The base URL of the medium provider.
+        :param base_url: The base URL of the Medium provider.
         """
 
         self.base_url = base_url

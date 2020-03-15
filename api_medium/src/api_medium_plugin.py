@@ -36,14 +36,14 @@ __license__ = "Hive Solutions Confidential Usage License (HSCUL)"
 
 import colony
 
-class ApiMediumPlugin(colony.Plugin):
+class APIMediumPlugin(colony.Plugin):
     """
-    he main class for the Medium Api plugin
+    he main class for the Medium API plugin
     """
 
     id = "pt.hive.cronus.plugins.api.medium"
-    name = "Medium Api"
-    description = "The plugin that offers the medium api"
+    name = "Medium API"
+    description = "The plugin that offers the Medium API"
     version = "1.0.0"
     author = "Hive Solutions Lda. <development@hive.pt>"
     platforms = [
@@ -63,15 +63,15 @@ class ApiMediumPlugin(colony.Plugin):
     def load_plugin(self):
         colony.Plugin.load_plugin(self)
         import api_medium
-        self.system = api_medium.ApiMedium(self)
+        self.system = api_medium.APIMedium(self)
 
     def create_client(self, api_attributes):
         """
-        Creates a client, with the given api attributes.
+        Creates a client, with the given API attributes.
 
         :type api_attributes: Dictionary
-        :param api_attributes: The api attributes to be used.
-        :rtype: EasypayClient
+        :param api_attributes: The API attributes to be used.
+        :rtype: MediumClient
         :return: The created client.
         """
 
