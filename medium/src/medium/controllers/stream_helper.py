@@ -51,7 +51,7 @@ class StreamHelperController(BaseController):
         self.send_broadcast(request.parameters, connection_name, serialized_message)
 
     def _get_serialized(self, message_id, message_contents):
-        # retrieves the json plugin
+        # retrieves the JSON plugin
         json_plugin = self.plugin.json_plugin
 
         # creates the message map and sets the message
@@ -60,7 +60,7 @@ class StreamHelperController(BaseController):
         message_map["id"] = message_id
         message_map["contents"] = message_contents
 
-        # serializes the message map using the json plugin and
+        # serializes the message map using the JSON plugin and
         # returns the serialized message to the caller method
         serialized_message = json_plugin.dumps(message_map)
         return serialized_message

@@ -59,7 +59,7 @@ class APIMedium(colony.System):
         # retrieves the client HTTP plugin
         client_http_plugin = self.plugin.client_http_plugin
 
-        # retrieves the json plugin
+        # retrieves the JSON plugin
         json_plugin = self.plugin.json_plugin
 
         # retrieves the Medium structure (if available)
@@ -79,7 +79,7 @@ class MediumClient(object):
     """
 
     json_plugin = None
-    """ The json plugin """
+    """ The JSON plugin """
 
     client_http_plugin = None
     """ The client HTTP plugin """
@@ -95,7 +95,7 @@ class MediumClient(object):
         Constructor of the class.
 
         :type json_plugin: JSONPlugin
-        :param json_plugin: The json plugin.
+        :param json_plugin: The JSON plugin.
         :type client_http_plugin: ClientHTTPPlugin
         :param client_http_plugin: The client HTTP plugin.
         :type medium_structure: MediumStructure
@@ -165,7 +165,7 @@ class MediumClient(object):
         parameters["value"] = value
 
         # fetches the retrieval URL with the given parameters retrieving
-        # the json and then loads the value into the data structure
+        # the JSON and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
         data = self.json_plugin.loads(json)
 
@@ -176,7 +176,7 @@ class MediumClient(object):
         """
         Sets the field for the given key and value.
         The given value is going to be serialized into
-        json and then provided to the service.
+        JSON and then provided to the service.
 
         :type key: String
         :param key: The key to the field to be set.
@@ -186,7 +186,7 @@ class MediumClient(object):
         :return: The field information for the given field parameters.
         """
 
-        # loads json retrieving the data
+        # loads JSON retrieving the data
         value_json = self.json_plugin.dumps(value)
 
         # sets the filed retrieving the return value
@@ -220,7 +220,7 @@ class MediumClient(object):
         parameters["type"] = type
 
         # fetches the retrieval URL with the given parameters retrieving
-        # the json and then loads the value into the data structure
+        # the JSON and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
         data = self.json_plugin.loads(json)
 
