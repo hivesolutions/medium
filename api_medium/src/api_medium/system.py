@@ -152,8 +152,8 @@ class MediumClient(object):
         :return: The field information for the given field parameters.
         """
 
-        # retrieves the base url from the Medium structure and then
-        # uses it to construct the retrieval url by appending the
+        # retrieves the base URL from the Medium structure and then
+        # uses it to construct the retrieval URL by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
         retrieval_url = base_url + "field.json"
@@ -164,7 +164,7 @@ class MediumClient(object):
         parameters["key"] = key
         parameters["value"] = value
 
-        # fetches the retrieval url with the given parameters retrieving
+        # fetches the retrieval URL with the given parameters retrieving
         # the json and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
         data = self.json_plugin.loads(json)
@@ -207,8 +207,8 @@ class MediumClient(object):
         :return: The message information for the given message parameters.
         """
 
-        # retrieves the base url from the Medium structure and then
-        # uses it to construct the retrieval url by appending the
+        # retrieves the base URL from the Medium structure and then
+        # uses it to construct the retrieval URL by appending the
         # current action suffix
         base_url = self.medium_structure.base_url
         retrieval_url = base_url + "message.json"
@@ -219,7 +219,7 @@ class MediumClient(object):
         parameters["value"] = value
         parameters["type"] = type
 
-        # fetches the retrieval url with the given parameters retrieving
+        # fetches the retrieval URL with the given parameters retrieving
         # the json and then loads the value into the data structure
         json = self._fetch_url(retrieval_url, parameters)
         data = self.json_plugin.loads(json)
@@ -249,31 +249,31 @@ class MediumClient(object):
 
     def _build_url(self, base_url, parameters):
         """
-        Builds the url for the given url and parameters.
+        Builds the URL for the given URL and parameters.
 
         :type base_url: String
         :param base_url: The base URL to be used.
         :type parameters: Dictionary
-        :param parameters: The parameters to be used for url construction.
+        :param parameters: The parameters to be used for URL construction.
         :rtype: String
-        :return: The built url for the given parameters.
+        :return: The built URL for the given parameters.
         """
 
         # retrieves the HTTP client
         http_client = self._get_http_client()
 
-        # build the url from the base url
+        # build the URL from the base URL
         url = http_client.build_url(base_url, "GET", parameters)
 
-        # returns the built url
+        # returns the built URL
         return url
 
     def _fetch_url(self, url, parameters = None, method = "GET"):
         """
-        Fetches the given url for the given parameters and using the given method.
+        Fetches the given URL for the given parameters and using the given method.
 
         :type url: String
-        :param url: The url to be fetched.
+        :param url: The URL to be fetched.
         :type parameters: Dictionary
         :param parameters: The parameters to be used the fetch.
         :type method: String
@@ -289,7 +289,7 @@ class MediumClient(object):
         # retrieves the HTTP client
         http_client = self._get_http_client()
 
-        # fetches the url retrieving the HTTP response and then
+        # fetches the URL retrieving the HTTP response and then
         # retrieves the received message as the contents response
         http_response = http_client.fetch_url(url, method, parameters, content_type_charset = "utf-8")
         contents = http_response.received_message
@@ -342,7 +342,7 @@ class MediumStructure(object):
 
     def get_base_url(self):
         """
-        Retrieves the base url.
+        Retrieves the base URL.
 
         :rtype: String
         :return: The base URL.
@@ -352,7 +352,7 @@ class MediumStructure(object):
 
     def set_base_url(self, base_url):
         """
-        Sets the base url.
+        Sets the base URL.
 
         :type base_url: String
         :param base_url: The base URL.
