@@ -2,11 +2,11 @@
 	path = medium/src/medium/resources/extras/libs/jquery
 	url = git@github.com:hivesolutions/jquery.git
 [submodule "medium/src/medium/resources/extras/libs/jquery_util"]
-	path = medium/src/medium/resources/extras/libs/jquery_util
-	url = git@github.com:hivesolutions/jquery_util.git
+	path = medium/src/medium/resources/extras/libs/jquery-util
+	url = git@github.com:hivesolutions/jquery-util.git
 [submodule "medium/src/medium/resources/extras/libs/jquery_util_ui"]
-	path = medium/src/medium/resources/extras/libs/jquery_util_ui
-	url = git@github.com:hivesolutions/jquery_util_ui.git
+	path = medium/src/medium/resources/extras/libs/jquery-util-ui
+	url = git@github.com:hivesolutions/jquery-util-ui.git
 [submodule "medium/src/medium/resources/extras/libs/util"]
 	path = medium/src/medium/resources/extras/libs/util
-	url = git@github.com:hivesolutions/js_util.git
+	url = git@github.com:hivesolutions/js-util.git
