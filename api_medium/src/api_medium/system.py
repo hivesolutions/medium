@@ -68,7 +68,7 @@ class APIMedium(colony.System):
         # creates a new Medium client with the given options and in
         # case the is meant to be open open the client
         medium_client = MediumClient(json_plugin, client_http_plugin, medium_structure)
-        open_client and medium_client.open()
+        if open_client: medium_client.open()
 
         # returns the Medium client
         return medium_client
